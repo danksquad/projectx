@@ -21,3 +21,31 @@ As a host, I want to automatically notify my attendees if they are late to the e
 
 Heroku Link:
 https://damp-caverns-14732.herokuapp.com/
+
+Database Schema:
+
+--User--
+ID: String
+FirstName: String
+LastName: String
+UserName: String
+Password: String
+ProfilePic: Image
+
+--Event--
+ID: String
+Name: String
+StartTime: NSDate
+EndTime: NSDate
+Location: String
+Supplies: Array of Strings
+Description: String
+
+--Message--
+ID: String
+TimeSent: NSDate
+SentByID: String
+SendToID: String
+LikeCount: Int
+Text: String
+
