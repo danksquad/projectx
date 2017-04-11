@@ -4,6 +4,9 @@ Description:
 Gathr is an event planning and group messaging app that puts the events at the focus.  Users are notified when they are invited to events that are hosted by their peers. From there, they can group message with everyone going to that event.
 
 Required user stories:
+As a user, I want to be able to login, so that I can access my account.
+As a user, I want to be able to create a new event, so that I can share it others.
+As a user, I want to see event details, so that I know specifics about the event.
 As a user, I want to be able to chat with other people that are going to the same event, so that I can better coordinate.
 As a host, I want to be able to invite people to my events, so that I can see how many people are coming.
 As a user, I want to know when people invite me to their events, so that I can always stay up to date with when people want to meet.
