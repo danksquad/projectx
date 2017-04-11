@@ -12,9 +12,11 @@
 		345CC4771E669AE2005F67A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 345CC4751E669AE2005F67A7 /* Main.storyboard */; };
 		345CC4791E669AE2005F67A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 345CC4781E669AE2005F67A7 /* Assets.xcassets */; };
 		345CC47C1E669AE2005F67A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 345CC47A1E669AE2005F67A7 /* LaunchScreen.storyboard */; };
+		FEB689E220CAC4C2B3756F9E /* Pods_gathr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA51236DCF6E80677E00AEEB /* Pods_gathr.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06D677330C5751708274F8E8 /* Pods-gathr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gathr.release.xcconfig"; path = "Pods/Target Support Files/Pods-gathr/Pods-gathr.release.xcconfig"; sourceTree = "<group>"; };
 		345CC46E1E669AE2005F67A7 /* gathr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gathr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		345CC4711E669AE2005F67A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		345CC4731E669AE2005F67A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +24,8 @@
 		345CC4781E669AE2005F67A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		345CC47B1E669AE2005F67A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		345CC47D1E669AE2005F67A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95CB51D021597B48B683F0FF /* Pods-gathr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gathr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gathr/Pods-gathr.debug.xcconfig"; sourceTree = "<group>"; };
+		BA51236DCF6E80677E00AEEB /* Pods_gathr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gathr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEB689E220CAC4C2B3756F9E /* Pods_gathr.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0770ED3999E4F1E8B5FDE24C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BA51236DCF6E80677E00AEEB /* Pods_gathr.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		345CC4651E669AE2005F67A7 = {
 			isa = PBXGroup;
 			children = (
 				345CC4701E669AE2005F67A7 /* gathr */,
 				345CC46F1E669AE2005F67A7 /* Products */,
+				47EA668BE069601C93F4EDA9 /* Pods */,
+				0770ED3999E4F1E8B5FDE24C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +79,15 @@
 			path = gathr;
 			sourceTree = "<group>";
 		};
+		47EA668BE069601C93F4EDA9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				95CB51D021597B48B683F0FF /* Pods-gathr.debug.xcconfig */,
+				06D677330C5751708274F8E8 /* Pods-gathr.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 345CC4801E669AE2005F67A7 /* Build configuration list for PBXNativeTarget "gathr" */;
 			buildPhases = (
+				724A72790E3B7E78F0A76D78 /* [CP] Check Pods Manifest.lock */,
 				345CC46A1E669AE2005F67A7 /* Sources */,
 				345CC46B1E669AE2005F67A7 /* Frameworks */,
 				345CC46C1E669AE2005F67A7 /* Resources */,
+				615CCFA93C4C3194200CD195 /* [CP] Embed Pods Frameworks */,
+				B61050EDD3452E80E2FD3A29 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		615CCFA93C4C3194200CD195 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-gathr/Pods-gathr-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		724A72790E3B7E78F0A76D78 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B61050EDD3452E80E2FD3A29 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-gathr/Pods-gathr-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		345CC46A1E669AE2005F67A7 /* Sources */ = {
@@ -258,6 +333,7 @@
 		};
 		345CC4811E669AE2005F67A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95CB51D021597B48B683F0FF /* Pods-gathr.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = gathr/Info.plist;
@@ -270,6 +346,7 @@
 		};
 		345CC4821E669AE2005F67A7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06D677330C5751708274F8E8 /* Pods-gathr.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = gathr/Info.plist;
