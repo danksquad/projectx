@@ -76,7 +76,7 @@
         <!--Feed-->
         <scene sceneID="WSN-y2-gYc">
             <objects>
-                <viewController id="yeb-zj-2Wc" sceneMemberID="viewController">
+                <viewController id="yeb-zj-2Wc" customClass="FeedViewController" customModule="gathr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1Cy-xu-kIs"/>
                         <viewControllerLayoutGuide type="bottom" id="9hJ-96-kFi"/>
@@ -96,6 +96,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Feed" id="ak0-RP-7Hc">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="B7j-v2-VsZ"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="V9o-3V-rTY"/>
                     </navigationItem>
                 </viewController>
@@ -128,7 +129,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OGV-PX-7g0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1009" y="-607"/>
+            <point key="canvasLocation" x="1972" y="-631"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tUW-Oq-Zr0">
