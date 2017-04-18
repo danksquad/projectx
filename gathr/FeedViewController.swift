@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class FeedViewController: UIViewController {
 
@@ -21,6 +22,18 @@ class FeedViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onLogout(_ sender: Any) {
+        print("user logged out")
+        PFUser.logOutInBackground { (error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+        }
+        self.dismiss(animated: true, completion: nil)
+        
+        
+    }
 
     /*
     // MARK: - Navigation

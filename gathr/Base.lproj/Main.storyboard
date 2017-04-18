@@ -96,7 +96,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Feed" id="ak0-RP-7Hc">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="B7j-v2-VsZ"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="B7j-v2-VsZ">
+                            <connections>
+                                <action selector="onLogout:" destination="yeb-zj-2Wc" id="3IK-si-Uq9"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="V9o-3V-rTY"/>
                     </navigationItem>
                 </viewController>
