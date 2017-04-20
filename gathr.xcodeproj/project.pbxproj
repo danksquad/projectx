@@ -15,6 +15,8 @@
 		345CC4771E669AE2005F67A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 345CC4751E669AE2005F67A7 /* Main.storyboard */; };
 		345CC4791E669AE2005F67A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 345CC4781E669AE2005F67A7 /* Assets.xcassets */; };
 		345CC47C1E669AE2005F67A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 345CC47A1E669AE2005F67A7 /* LaunchScreen.storyboard */; };
+		F0862AE91EA869EB00BDBC1A /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0862AE81EA869EB00BDBC1A /* Event.swift */; };
+		F0862AEB1EA869F400BDBC1A /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0862AEA1EA869F400BDBC1A /* EventViewController.swift */; };
 		FEB689E220CAC4C2B3756F9E /* Pods_gathr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA51236DCF6E80677E00AEEB /* Pods_gathr.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,8 @@
 		345CC47D1E669AE2005F67A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95CB51D021597B48B683F0FF /* Pods-gathr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gathr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gathr/Pods-gathr.debug.xcconfig"; sourceTree = "<group>"; };
 		BA51236DCF6E80677E00AEEB /* Pods_gathr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gathr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0862AE81EA869EB00BDBC1A /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = ../../../../.Trash/gathr/gathr/Event.swift; sourceTree = "<group>"; };
+		F0862AEA1EA869F400BDBC1A /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventViewController.swift; path = ../../../../.Trash/gathr/gathr/EventViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 				343269D51EA5AA2800C923A4 /* LoginViewController.swift */,
 				340F95C71EA5CDB200389DF5 /* FeedViewController.swift */,
 				344B8A1B1EA829FB0019687D /* CreateAccountViewController.swift */,
+				F0862AEA1EA869F400BDBC1A /* EventViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -68,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				3455DF001EA7E74F002DAE79 /* ParseClient.swift */,
+				F0862AE81EA869EB00BDBC1A /* Event.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -238,8 +244,10 @@
 			files = (
 				344B8A1C1EA829FB0019687D /* CreateAccountViewController.swift in Sources */,
 				343269D61EA5AA2800C923A4 /* LoginViewController.swift in Sources */,
+				F0862AEB1EA869F400BDBC1A /* EventViewController.swift in Sources */,
 				3455DF011EA7E74F002DAE79 /* ParseClient.swift in Sources */,
 				340F95C81EA5CDB200389DF5 /* FeedViewController.swift in Sources */,
+				F0862AE91EA869EB00BDBC1A /* Event.swift in Sources */,
 				345CC4721E669AE2005F67A7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
