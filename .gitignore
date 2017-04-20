@@ -1,1 +1,4 @@
 .DS_Store
+Pods/Pods.xcodeproj/*
+gathr.xcodeproj/*
+gathr.xcworkspace/*
