@@ -54,6 +54,9 @@ class EventViewController: UIViewController {
         }
     }
 
+    @IBAction func onCancel(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
     
     
     

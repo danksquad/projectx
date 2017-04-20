@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -22,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             configuration.applicationId = "projectx"
             configuration.clientKey = "asdbu09gj092q4g0fdfnni&*&Y(*@#ibi2uubr9u2h98&"
             configuration.server = "https://damp-caverns-14732.herokuapp.com/parse"
-        }))
+        }))        
         
         return true
     }
