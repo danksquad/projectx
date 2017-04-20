@@ -10,11 +10,24 @@ import UIKit
 import Parse
 
 class FeedViewController: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
+    
+    var events: [PFObject]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableView.dataSource = self
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "eventsFetched"), object: nil, queue: OperationQueue.main) { (notification: Notification) in
+            self.events = ParseClient.events
+            self.tableView.reloadData()
+        }
+        
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(FeedViewController.refreshEvents), userInfo: nil, repeats: true)
+        
+        //refreshEvents()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,8 +44,12 @@ class FeedViewController: UIViewController {
             
         }
         self.dismiss(animated: true, completion: nil)
-        
-        
+
+    }
+    
+    func refreshEvents() {
+        ParseClient.getAllEvents()
+
     }
 
     /*
@@ -45,4 +62,33 @@ class FeedViewController: UIViewController {
     }
     */
 
+}
+
+extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "com.gates.EventCell", for: indexPath) as! EventCell
+        
+        // getting the labels from the PFObjects
+        let currEventName = events?[indexPath.row].object(forKey: "name") as? String
+        let currEventDesc = events?[indexPath.row].object(forKey: "eventDescription") as? String
+        
+        // unwrapping as optional, because we might not have forced event name to be required
+        cell.eventDescriptionLabel.text = ""
+        if let currEventName = currEventName {
+            cell.eventNameLabel.text = currEventName
+        }
+        if let currEventDesc = currEventDesc {
+            cell.eventDescriptionLabel.text = currEventDesc
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let events = events {
+            return events.count
+        }
+        return 0
+    }
 }

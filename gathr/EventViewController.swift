@@ -52,6 +52,8 @@ class EventViewController: UIViewController {
                 print(error?.localizedDescription ?? "Error creating Event")
             }
         }
+        
+        dismiss(animated: true, completion: nil)
     }
 
     @IBAction func onCancel(_ sender: UIBarButtonItem) {

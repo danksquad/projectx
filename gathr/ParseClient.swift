@@ -10,6 +10,12 @@ import UIKit
 import Parse
 
 class ParseClient: NSObject {
+    static var events: [PFObject] = [] {
+        didSet {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "eventsFetched"), object: nil)
+        }
+    }
+    
     class func sendMessage(message: String?, withCompletion completion: PFBooleanResultBlock) {
         var newMessage = PFObject(className: "message")
         newMessage["text"] = message!
@@ -25,6 +31,23 @@ class ParseClient: NSObject {
             
         }
     }
-
-
+    
+    class func getAllEvents() {
+        var query = PFQuery(className: "events")
+        query.order(byDescending: "start_time")
+        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
+            
+            if error == nil {
+                // find succeeded
+                print("Successfully retrieved \(objects!.count) events")
+                
+                if let objects = objects {
+                    self.events = objects
+                }
+                
+            } else {
+                self.events = []
+            }
+        }
+    }
 }
