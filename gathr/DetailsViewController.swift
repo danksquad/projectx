@@ -25,15 +25,19 @@ class DetailsViewController: UIViewController {
         let eventName = event?["name"] as? String
         self.eventName.text = eventName
         
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .medium
+        
         if let eventStartTime = event?["startTime"] {
-            self.eventStartTime.text = String(describing: eventStartTime)
+            self.eventStartTime.text = formatter.string(from: eventStartTime as! Date)
         }
         else {
             self.eventStartTime.text = "Unspecified"
         }
         
         if let eventEndTime = event?["endTime"] {
-            self.eventEndTime.text = String(describing: eventEndTime)
+            self.eventEndTime.text = formatter.string(from: eventEndTime as! Date)
         }
         else {
             self.eventEndTime.text = "Unspecified"

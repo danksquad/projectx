@@ -67,7 +67,6 @@ class FeedViewController: UIViewController {
             
             let event = self.events?[(indexPath?.row)!]
             detailsViewController.event = event
-            print(indexPath?.row)
         }
         
     }
