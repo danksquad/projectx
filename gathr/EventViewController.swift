@@ -18,9 +18,6 @@ class EventViewController: UIViewController {
     @IBOutlet weak var endTimeDatePicker: UIDatePicker!
     @IBOutlet weak var descriptionTextField: UITextField!
     
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
 

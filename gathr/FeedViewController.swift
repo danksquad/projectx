@@ -52,15 +52,26 @@ class FeedViewController: UIViewController {
 
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "detailsSegue" {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPath(for: cell)
+            let detailsViewController = segue.destination as! DetailsViewController
+            
+            let event = self.events?[(indexPath?.row)!]
+            detailsViewController.event = event
+            print(indexPath?.row)
+        }
+        
     }
-    */
+ 
 
 }
 
