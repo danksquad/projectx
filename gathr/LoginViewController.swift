@@ -48,8 +48,9 @@ class LoginViewController: UIViewController {
             if let error = error {
                 self.displayErrorDialog(error: error, sender: sender)
             } else {
-                print("logged in")
                 if user != nil {
+                    print("logged in")
+                    ParseClient.currentUser = user
                     self.performSegue(withIdentifier: "loginSegue", sender: nil)
                 }
             }

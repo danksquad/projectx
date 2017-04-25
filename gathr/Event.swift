@@ -35,10 +35,24 @@ class Event: NSObject {
         event["eventDescription"] = eventDescription
         event["startTime"] = startTime
         event["endTime"] = endTime
+        event["uid"] = self.generateUID(length: 12)
 
         // Save object (following function will save the object in Parse asynchronously)
         event.saveInBackground(block: completion)
         
+    }
+    
+    class func generateUID(length: Int) -> String {
+        let letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        var uid = ""
+        
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(UInt32(letters.length)) as! Int
+            var nextChar = letters.character(at: rand)
+            uid += NSString(characters: &nextChar, length: 1) as String
+        }
+        
+        return uid
     }
     
 
