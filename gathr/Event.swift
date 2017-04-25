@@ -16,6 +16,7 @@ class Event: NSObject {
     var eventDescription: String?
     var startTime: Date
     var endTime: Date
+    var roomID: String?
     
     init(name: String, location: String,eventDescription: String, startTime: Date, endTime: Date){
         self.name = name
@@ -26,7 +27,7 @@ class Event: NSObject {
     }
     
     class func postEvent(name: String?, location: String?, eventDescription: String?, startTime: Date, endTime: Date, withCompletion completion: PFBooleanResultBlock?){
-        let roomID = self.generateUID(length: 12)
+        let roomID = "e_" + ParseClient.generateUID(length: 12)
         
         // Create Parse object PFObject
         let event = PFObject(className: "events")
@@ -48,19 +49,6 @@ class Event: NSObject {
         
         chatroom.saveInBackground(block: completion)
         
-    }
-    
-    class func generateUID(length: Int) -> String {
-        let letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        var uid = ""
-        
-        for _ in 0 ..< length {
-            let rand = arc4random_uniform(UInt32(letters.length))
-            var nextChar = letters.character(at: Int(rand))
-            uid += NSString(characters: &nextChar, length: 1) as String
-        }
-        
-        return uid
     }
     
 

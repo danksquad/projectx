@@ -33,11 +33,13 @@ class CreateAccountViewController: UIViewController {
     @IBAction func onCreateAccount(_ sender: Any) {
         // create a new PFUser obj
         let newUser = PFUser()
+        let user_id = "u_" + ParseClient.generateUID(length: 12)
+        
         newUser.username = usernameField.text
         newUser.password = passwordField.text
         newUser.add(fNameField.text ?? "John", forKey: "firstName")
         newUser.add(lNameField.text ?? "Smith", forKey: "lastName")
-        
+        newUser.add(user_id, forKey: "user_id")
         
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if success {

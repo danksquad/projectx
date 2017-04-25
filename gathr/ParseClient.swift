@@ -15,6 +15,7 @@ class ParseClient: NSObject {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "eventsFetched"), object: nil)
         }
     }
+    static var users: [PFObject] = []
     
     static var currentUser: PFUser?
     
@@ -55,7 +56,53 @@ class ParseClient: NSObject {
         }
     }
     
-    // This method will push a notification to the notification database
+    // This method will get a list of all the users
+    class func getAllUsers() {
+        let query = PFQuery(className: "_Users")
+        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
+            
+            if error == nil {
+                print("Successfully pulled \(objects!.count) users")
+                
+                if let objects = objects {
+                    self.users = objects
+                }
+            } else {
+                self.events = []
+            }
+        }
+    }
     
+    
+    // This method will push a notification to the notification database
+    class func sendInvite(from_user: String?, to_user: String?, room_id: String?, withCompletion completion: PFBooleanResultBlock) {
+        let invite = PFObject(className: "notifications")
+        
+        invite["from_user"] = from_user
+        invite["to_user"] = to_user
+        invite["room_id"] = room_id
+        
+        invite.saveInBackground { (success: Bool, error: Error?) in
+            if (success) {
+                print("invite sent")
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
+    }
+    
+    
+    class func generateUID(length: Int) -> String {
+        let letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        var uid = ""
+        
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(UInt32(letters.length))
+            var nextChar = letters.character(at: Int(rand))
+            uid += NSString(characters: &nextChar, length: 1) as String
+        }
+        
+        return uid
+    }
     
 }
