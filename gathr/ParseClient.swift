@@ -16,6 +16,8 @@ class ParseClient: NSObject {
         }
     }
     
+    static var currentUser: PFUser?
+    
     class func sendMessage(message: String?, withCompletion completion: PFBooleanResultBlock) {
         let newMessage = PFObject(className: "message")
         newMessage["text"] = message!

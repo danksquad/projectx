@@ -42,6 +42,7 @@ class CreateAccountViewController: UIViewController {
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if success {
                 print("created new user")
+                ParseClient.currentUser = newUser
                 self.performSegue(withIdentifier: "signupSegue", sender: nil)
             } else {
                 
