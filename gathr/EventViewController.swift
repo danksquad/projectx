@@ -30,6 +30,18 @@ class EventViewController: UIViewController {
     }
     
     @IBAction func onDoneButton(_ sender: Any) {
+        if (self.nameTextField.text?.isEmpty)! || (self.locationTextField.text?.isEmpty)! {
+            let alertController = UIAlertController(title: "ALERT", message: "Name and Location required", preferredStyle: .alert)
+            
+            present(alertController, animated: true, completion: nil)
+
+           /* alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+           
+                alertController.dismiss(animated: true, completion: nil)
+            }))*/
+            
+            
+        }
         
         let nameToEvent = self.nameTextField.text
         let locationToEvent = self.locationTextField.text
