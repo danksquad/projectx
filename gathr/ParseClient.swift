@@ -18,8 +18,9 @@ class ParseClient: NSObject {
     
     static var currentUser: PFUser?
     
+    // This method will send the message to the messages database (not in use at the moment)
     class func sendMessage(message: String?, withCompletion completion: PFBooleanResultBlock) {
-        let newMessage = PFObject(className: "message")
+        let newMessage = PFObject(className: "messages")
         newMessage["text"] = message!
         newMessage["time_sent"] = Date()
         newMessage["sent_by_id"] = PFUser.current()
@@ -34,6 +35,7 @@ class ParseClient: NSObject {
         }
     }
     
+    // This method will get pull all of the events from the user
     class func getAllEvents() {
         let query = PFQuery(className: "events")
         query.order(byDescending: "start_time")
@@ -52,4 +54,8 @@ class ParseClient: NSObject {
             }
         }
     }
+    
+    // This method will push a notification to the notification database
+    
+    
 }
