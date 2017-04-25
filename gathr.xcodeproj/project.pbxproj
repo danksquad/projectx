@@ -17,6 +17,9 @@
 		345CC47C1E669AE2005F67A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 345CC47A1E669AE2005F67A7 /* LaunchScreen.storyboard */; };
 		34D9B79C1EA93ACD0048021C /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9B79B1EA93ACD0048021C /* NotificationViewController.swift */; };
 		34D9B79E1EA968F70048021C /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9B79D1EA968F70048021C /* EventCell.swift */; };
+		844DF5291EAB244D00C125F4 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DF5281EAB244D00C125F4 /* ChatRoomViewController.swift */; };
+		844DF52B1EAB2A6600C125F4 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DF52A1EAB2A6600C125F4 /* MessageCell.swift */; };
+		84FC2F441EA9BCAE00979676 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC2F431EA9BCAE00979676 /* DetailsViewController.swift */; };
 		F0F77B901EA86E2700ADE514 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F77B8F1EA86E2700ADE514 /* EventViewController.swift */; };
 		F0F77B921EA86E3600ADE514 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F77B911EA86E3600ADE514 /* Event.swift */; };
 		FEB689E220CAC4C2B3756F9E /* Pods_gathr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA51236DCF6E80677E00AEEB /* Pods_gathr.framework */; };
@@ -36,6 +39,9 @@
 		345CC47D1E669AE2005F67A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34D9B79B1EA93ACD0048021C /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		34D9B79D1EA968F70048021C /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		844DF5281EAB244D00C125F4 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
+		844DF52A1EAB2A6600C125F4 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		84FC2F431EA9BCAE00979676 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		95CB51D021597B48B683F0FF /* Pods-gathr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gathr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gathr/Pods-gathr.debug.xcconfig"; sourceTree = "<group>"; };
 		BA51236DCF6E80677E00AEEB /* Pods_gathr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gathr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0F77B8F1EA86E2700ADE514 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +76,8 @@
 				340F95C71EA5CDB200389DF5 /* FeedViewController.swift */,
 				344B8A1B1EA829FB0019687D /* CreateAccountViewController.swift */,
 				34D9B79B1EA93ACD0048021C /* NotificationViewController.swift */,
+				84FC2F431EA9BCAE00979676 /* DetailsViewController.swift */,
+				844DF5281EAB244D00C125F4 /* ChatRoomViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -120,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				34D9B79D1EA968F70048021C /* EventCell.swift */,
+				844DF52A1EAB2A6600C125F4 /* MessageCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -163,7 +172,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Gates Zeng";
 				TargetAttributes = {
 					345CC46D1E669AE2005F67A7 = {
@@ -261,10 +270,13 @@
 				343269D61EA5AA2800C923A4 /* LoginViewController.swift in Sources */,
 				34D9B79C1EA93ACD0048021C /* NotificationViewController.swift in Sources */,
 				3455DF011EA7E74F002DAE79 /* ParseClient.swift in Sources */,
+				844DF52B1EAB2A6600C125F4 /* MessageCell.swift in Sources */,
 				340F95C81EA5CDB200389DF5 /* FeedViewController.swift in Sources */,
 				345CC4721E669AE2005F67A7 /* AppDelegate.swift in Sources */,
 				F0F77B921EA86E3600ADE514 /* Event.swift in Sources */,
 				F0F77B901EA86E2700ADE514 /* EventViewController.swift in Sources */,
+				84FC2F441EA9BCAE00979676 /* DetailsViewController.swift in Sources */,
+				844DF5291EAB244D00C125F4 /* ChatRoomViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +320,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -358,6 +371,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

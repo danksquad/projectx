@@ -47,8 +47,7 @@ class CreateAccountViewController: UIViewController {
                 
                 print("Error on Sign Up")
                 self.displayErrorDialog(error: error)
-                
-                print(error?.localizedDescription)
+                print(error!.localizedDescription)
             }
         }
         

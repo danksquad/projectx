@@ -27,7 +27,6 @@ class Event: NSObject {
     
     class func postEvent(name: String?, location: String?, eventDescription: String?, startTime: Date, endTime: Date, withCompletion completion: PFBooleanResultBlock?){
         
-        
         // Create Parse object PFObject
         let event = PFObject(className: "events")
         

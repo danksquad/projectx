@@ -17,7 +17,7 @@ class ParseClient: NSObject {
     }
     
     class func sendMessage(message: String?, withCompletion completion: PFBooleanResultBlock) {
-        var newMessage = PFObject(className: "message")
+        let newMessage = PFObject(className: "message")
         newMessage["text"] = message!
         newMessage["time_sent"] = Date()
         newMessage["sent_by_id"] = PFUser.current()
@@ -33,7 +33,7 @@ class ParseClient: NSObject {
     }
     
     class func getAllEvents() {
-        var query = PFQuery(className: "events")
+        let query = PFQuery(className: "events")
         query.order(byDescending: "start_time")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             
