@@ -37,9 +37,9 @@ class CreateAccountViewController: UIViewController {
         
         newUser.username = usernameField.text
         newUser.password = passwordField.text
-        newUser.add(fNameField.text ?? "John", forKey: "firstName")
-        newUser.add(lNameField.text ?? "Smith", forKey: "lastName")
-        newUser.add(user_id, forKey: "user_id")
+        newUser["firstName"] = fNameField.text ?? "John"
+        newUser["lastName"] = lNameField.text ?? "Smith"
+        newUser["user_id"] = user_id
         
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if success {

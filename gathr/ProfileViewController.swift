@@ -19,8 +19,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         let myProfile: PFUser! = ParseClient.currentUser
 
-        firstNameLabel.text = myProfile.value(forUndefinedKey: "firstName") as! String
-        lastNameLabel.text = myProfile.value(forUndefinedKey: "firstName") as! String
+        firstNameLabel.text = myProfile.value(forKey: "firstName") as! String?
+        lastNameLabel.text = myProfile.value(forKey: "lastName") as! String?
         screenNameLabel.text = myProfile.username
     }
 
