@@ -13,16 +13,31 @@ class InvitationViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var event: PFObject?
+    var users: [PFObject]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.dataSource = self
+        
+        ParseClient.getAllUsers()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "usersFetched"), object: nil, queue: OperationQueue.main) { (notification: Notification) in
+            self.users = ParseClient.users
+            self.tableView.reloadData()
+        }
 
-        // Do any additional setup after loading the view.
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(InvitationViewController.refreshUsers), userInfo: nil, repeats: true)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func refreshUsers() {
+        ParseClient.getAllUsers()
+        
     }
     
 
@@ -36,4 +51,28 @@ class InvitationViewController: UIViewController {
     }
     */
 
+}
+
+extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "com.gates.InviteUserCell", for: indexPath) as! InviteUserCell
+        
+        let currUser = users![indexPath.row] as! PFUser
+        
+        let currName = "\(currUser.value(forKey: "firstName")!) \(currUser.value(forKey: "lastName")!)"
+        let currUsername = currUser.value(forKey: "username") as! String
+        
+        cell.firstLastNameLabel.text = currName
+        cell.usernameLabel.text = currUsername
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let users = users {
+            return users.count
+        }
+        return 0
+    }
 }

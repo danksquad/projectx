@@ -49,7 +49,6 @@ class FeedViewController: UIViewController {
     
     func refreshEvents() {
         ParseClient.getAllEvents()
-
     }
 
     

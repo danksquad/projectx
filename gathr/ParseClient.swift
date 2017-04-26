@@ -15,7 +15,11 @@ class ParseClient: NSObject {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "eventsFetched"), object: nil)
         }
     }
-    static var users: [PFObject] = []
+    static var users: [PFObject] = [] {
+        didSet {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "usersFetched"), object: nil)
+        }
+    }
     
     static var currentUser: PFUser?
     
@@ -58,7 +62,7 @@ class ParseClient: NSObject {
     
     // This method will get a list of all the users
     class func getAllUsers() {
-        let query = PFQuery(className: "_Users")
+        let query = PFQuery(className: "_User")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             
             if error == nil {
