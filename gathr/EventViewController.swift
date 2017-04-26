@@ -29,16 +29,16 @@ class EventViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onDoneButton(_ sender: Any) {
+    @IBAction func onDoneButton(_ sender: UIButton) {
         if (self.nameTextField.text?.isEmpty)! || (self.locationTextField.text?.isEmpty)! {
             let alertController = UIAlertController(title: "ALERT", message: "Name and Location required", preferredStyle: .alert)
             
             present(alertController, animated: true, completion: nil)
 
-           /* alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+           alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.cancel, handler: { (action: UIAlertAction!) in
            
                 alertController.dismiss(animated: true, completion: nil)
-            }))*/
+            }))
             
             
         }
