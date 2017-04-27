@@ -33,36 +33,42 @@ class EventViewController: UIViewController {
         if (self.nameTextField.text?.isEmpty)! || (self.locationTextField.text?.isEmpty)! {
             let alertController = UIAlertController(title: "ALERT", message: "Name and Location required", preferredStyle: .alert)
             
-            present(alertController, animated: true, completion: nil)
-
-           alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.cancel, handler: { (action: UIAlertAction!) in
-           
+            // create a cancel action
+            let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: { (action: UIAlertAction!) in
+                
                 alertController.dismiss(animated: true, completion: nil)
-            }))
+            })
+            
+            // add the cancel action to the alertController
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
             
             
         }
-        
-        let nameToEvent = self.nameTextField.text
-        let locationToEvent = self.locationTextField.text
-        let startTimeToEvent = self.startTimeDatePicker.date
-        let endTimeToEvent = self.endTimeDatePicker.date
-        let descriptionToEvent = self.descriptionTextField.text
-        
-        Event.postEvent(name: nameToEvent, location: locationToEvent, eventDescription: descriptionToEvent, startTime: startTimeToEvent, endTime: endTimeToEvent) { (success: Bool, error: Error?) in
-            if success {
-                print("Created Event")
-                self.nameTextField.text = ""
-                self.locationTextField.text = ""
-                self.descriptionTextField.text = ""
-
+        else{
+            
+            let nameToEvent = self.nameTextField.text
+            let locationToEvent = self.locationTextField.text
+            let startTimeToEvent = self.startTimeDatePicker.date
+            let endTimeToEvent = self.endTimeDatePicker.date
+            let descriptionToEvent = self.descriptionTextField.text
+            
+            Event.postEvent(name: nameToEvent, location: locationToEvent, eventDescription: descriptionToEvent, startTime: startTimeToEvent, endTime: endTimeToEvent) { (success: Bool, error: Error?) in
+                if success {
+                    print("Created Event")
+                    self.nameTextField.text = ""
+                    self.locationTextField.text = ""
+                    self.descriptionTextField.text = ""
+                    
+                }
+                else {
+                    print(error?.localizedDescription ?? "Error creating Event")
+                }
             }
-            else {
-                print(error?.localizedDescription ?? "Error creating Event")
-            }
+            
+            dismiss(animated: true, completion: nil)
         }
-        
-        dismiss(animated: true, completion: nil)
     }
 
     @IBAction func onCancel(_ sender: UIBarButtonItem) {
