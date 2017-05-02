@@ -18,10 +18,18 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let myProfile: PFUser! = ParseClient.currentUser
-
-        firstNameLabel.text = myProfile.value(forKey: "firstName") as! String?
-        lastNameLabel.text = myProfile.value(forKey: "lastName") as! String?
-        screenNameLabel.text = myProfile.username
+        
+        if let firstName = myProfile.value(forKey: "firstName") as! String?{
+        firstNameLabel.text =  ("First Name: " + firstName)
+        }
+        
+        if let lastName = myProfile.value(forKey: "lastName") as! String?{
+        lastNameLabel.text = ("Last Name: " + lastName)
+        }
+        
+        if let userName = myProfile.username{
+        screenNameLabel.text = ("User Name: " + userName)
+        }
     }
 
     override func didReceiveMemoryWarning() {
