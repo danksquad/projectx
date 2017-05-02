@@ -29,6 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             configuration.server = "https://damp-caverns-14732.herokuapp.com/parse"
         }))        
         
+        // A user is logged in
+        if PFUser.current() != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "homeScreen")
+            window?.rootViewController = vc
+        }
+    
         return true
     }
 

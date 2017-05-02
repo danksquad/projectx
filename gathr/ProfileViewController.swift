@@ -17,18 +17,18 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let myProfile: PFUser! = ParseClient.currentUser
         
-        if let firstName = myProfile.value(forKey: "firstName") as! String?{
-        firstNameLabel.text =  ("First Name: " + firstName)
-        }
-        
-        if let lastName = myProfile.value(forKey: "lastName") as! String?{
-        lastNameLabel.text = ("Last Name: " + lastName)
-        }
-        
-        if let userName = myProfile.username{
-        screenNameLabel.text = ("User Name: " + userName)
+        if let currentUser = PFUser.current() {
+            
+            if let firstName = currentUser["firstName"] as! String? {
+                firstNameLabel.text = ("First Name: " + firstName)
+            }
+            if let lastName = currentUser["lastName"] as! String? {
+                lastNameLabel.text = ("Last Name: " + lastName)
+            }
+            if let username = currentUser["username"] as! String? {
+                screenNameLabel.text = ("Username: " + username)
+            }
         }
     }
 
