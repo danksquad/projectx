@@ -10,6 +10,14 @@ import UIKit
 
 class NotificationViewController: UIViewController {
 
+    @IBOutlet weak var eventNameLabel: UILabel!
+    @IBOutlet weak var eventDateLabel: UILabel!
+    @IBOutlet weak var eventTimeLabel: UILabel!
+    @IBOutlet weak var eventHostLabel: UILabel!
+    @IBOutlet weak var eventSeenLabel: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
