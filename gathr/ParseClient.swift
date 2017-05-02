@@ -85,6 +85,7 @@ class ParseClient: NSObject {
         invite["from_user"] = from_user
         invite["to_user"] = to_user
         invite["room_id"] = room_id
+        invite["seen"] = false
         
         invite.saveInBackground { (success: Bool, error: Error?) in
             if (success) {
@@ -93,6 +94,10 @@ class ParseClient: NSObject {
                 print(error?.localizedDescription)
             }
         }
+    }
+    
+    class func updateInvitedUsers(room_id: String?, user_id: String?) {
+        
     }
     
     
