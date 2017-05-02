@@ -38,6 +38,7 @@ class Event: NSObject {
         event["startTime"] = startTime
         event["endTime"] = endTime
         event["room_id"] = roomID
+        event.add(ParseClient.currentUser?.value(forKey: "user_id"), forKey: "invited_users")
 
         // Save object (following function will save the object in Parse asynchronously)
         event.saveInBackground(block: completion)
