@@ -19,6 +19,7 @@ class InvitationViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.dataSource = self
+        tableView.delegate = self
         
         ParseClient.getAllUsers()
         
@@ -74,5 +75,27 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
             return users.count
         }
         return 0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedUser = users![indexPath.row] as! PFUser
+        
+        ParseClient.sendInvite(from_user: ParseClient.currentUser?.value(forKey: "user_id") as! String?, to_user: selectedUser.value(forKey: "user_id") as! String?, room_id: event?.value(forKey: "room_id") as! String?) { (success: Bool, error: Error?) in
+            print(selectedUser.value(forKey: "username") as! String)
+        }
+        displaySentDialog(user: selectedUser.username)
+    }
+    
+    func displaySentDialog(user: String?) {
+        // create the controller
+        let messageController = UIAlertController(title: "Invitation Sent", message: "Invitation Sent to \(user!)", preferredStyle: .alert)
+        
+        // create an OK action
+        let OKAction = UIAlertAction(title: "OK", style: .default)
+        
+        // add the OK action to the alert controller
+        messageController.addAction(OKAction)
+        
+        self.present(messageController, animated: true)
     }
 }
