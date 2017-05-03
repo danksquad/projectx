@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,12 +18,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            // Enable or disable features based on authorization.
+        }
+        
         Parse.initialize(with: ParseClientConfiguration(block: {(configuration: ParseMutableClientConfiguration) in
             configuration.applicationId = "projectx"
             configuration.clientKey = "asdbu09gj092q4g0fdfnni&*&Y(*@#ibi2uubr9u2h98&"
             configuration.server = "https://damp-caverns-14732.herokuapp.com/parse"
         }))        
         
+        // A user is logged in
+        if PFUser.current() != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "homeScreen")
+            window?.rootViewController = vc
+        }
+    
         return true
     }
 
