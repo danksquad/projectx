@@ -61,6 +61,7 @@ class ParseClient: NSObject {
     }
     
     // This method will get a list of all the users
+    // DEPRECATED: CALLBACK USED INSTEAD
     class func getAllUsers() {
         let query = PFQuery(className: "_User")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
@@ -70,6 +71,24 @@ class ParseClient: NSObject {
                 
                 if let objects = objects {
                     self.users = objects
+                }
+            } else {
+                self.events = []
+            }
+        }
+    }
+    
+    // This method will get a list of all the users
+    class func getAllUsers(completion: @escaping ([PFObject]) -> Void) {
+        let query = PFQuery(className: "_User")
+        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
+            
+            if error == nil {
+                print("Successfully pulled \(objects!.count) users")
+                
+                if let objects = objects {
+                    //self.users = objects
+                    completion(objects)
                 }
             } else {
                 self.events = []
@@ -87,6 +106,8 @@ class ParseClient: NSObject {
         invite["room_id"] = room_id
         invite["seen"] = false
         
+        updateInvitedUsers(room_id: room_id, user_id: to_user)
+        
         invite.saveInBackground { (success: Bool, error: Error?) in
             if (success) {
                 print("invite sent")
@@ -96,8 +117,27 @@ class ParseClient: NSObject {
         }
     }
     
-    class func updateInvitedUsers(room_id: String?, user_id: String?) {
-        
+    class func updateInvitedUsers(room_id: String!, user_id: String!) {
+        let query = PFQuery(className: "events")
+        query.whereKey("room_id", equalTo: room_id!)
+//        query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
+//            if let object = object {
+//                let event = object
+//                print("sent invite for room_id: \(event.value(forKey: "room_id"))")
+//                event.add([user_id], forKey: "invited_users")
+//            }
+//        }
+        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
+            if objects != nil {
+                let event = objects?.first
+                print("sent invite for room_id: \(event!.value(forKey: "room_id")!)")
+                event?.add([user_id], forKey: "invited_users")
+                
+                event?.saveInBackground()
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
     }
     
     

@@ -21,14 +21,17 @@ class InvitationViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        ParseClient.getAllUsers()
+        //ParseClient.getAllUsers()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "usersFetched"), object: nil, queue: OperationQueue.main) { (notification: Notification) in
-            self.users = ParseClient.users
+        ParseClient.getAllUsers { (users: [PFObject]) in
+            self.users = users
             self.tableView.reloadData()
         }
-
-        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(InvitationViewController.refreshUsers), userInfo: nil, repeats: true)
+        
+//        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "usersFetched"), object: nil, queue: OperationQueue.main) { (notification: Notification) in
+//            self.users = ParseClient.users
+//            self.tableView.reloadData()
+//        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,8 +77,11 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
         if let users = users {
             return users.count
         }
+        
         return 0
     }
+    
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedUser = users![indexPath.row] as! PFUser
@@ -84,6 +90,7 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
             print(selectedUser.value(forKey: "username") as! String)
         }
         displaySentDialog(user: selectedUser.username)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func displaySentDialog(user: String?) {
