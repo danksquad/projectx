@@ -120,20 +120,12 @@ class ParseClient: NSObject {
     class func updateInvitedUsers(room_id: String!, user_id: String!) {
         let query = PFQuery(className: "events")
         query.whereKey("room_id", equalTo: room_id!)
-//        query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
-//            if let object = object {
-//                let event = object
-//                print("sent invite for room_id: \(event.value(forKey: "room_id"))")
-//                event.add([user_id], forKey: "invited_users")
-//            }
-//        }
-        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
-            if objects != nil {
-                let event = objects?.first
-                print("sent invite for room_id: \(event!.value(forKey: "room_id")!)")
-                event?.add([user_id], forKey: "invited_users")
-                
-                event?.saveInBackground()
+        query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
+            if let object = object {
+                let event = object
+                print("sent invite for room_id: \(event.value(forKey: "room_id")!)")
+                event.add(user_id, forKey: "invited_users")
+                event.saveInBackground()
             } else {
                 print(error?.localizedDescription)
             }

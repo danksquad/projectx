@@ -48,6 +48,8 @@ class DetailsViewController: UIViewController {
         
         let eventDescription = event?["eventDescription"] as? String
         self.eventDescription.text = eventDescription
+        
+        print("details for room_id: \(event!.value(forKey: "room_id")!)")
     }
 
     override func didReceiveMemoryWarning() {
