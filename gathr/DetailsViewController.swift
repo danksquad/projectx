@@ -71,6 +71,16 @@ class DetailsViewController: UIViewController {
             invitationViewController.event = self.event
         }
         
+        if segue.identifier == "toChatroom" {
+            let chatroomViewController = segue.destination as! ChatRoomViewController
+            
+            
+            chatroomViewController.roomId = event?.value(forKey: "room_id") as! String
+            
+            print("Test")
+            
+        }
+        
     }
     
 
