@@ -28,8 +28,8 @@ class FeedViewController: UIViewController {
         
         //refreshEvents()
         
-        print("currentUser objectId: \(ParseClient.currentUser!.objectId!)")
-        print("currentUser user_id: \(ParseClient.currentUser!.value(forKey: "user_id")!)")
+        //print("currentUser objectId: \(ParseClient.currentUser!.objectId!)")
+        //print("currentUser user_id: \(ParseClient.currentUser!.value(forKey: "user_id")!)")
         
     }
 
