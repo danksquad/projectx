@@ -24,19 +24,23 @@ class ParseClient: NSObject {
     static var currentUser: PFUser?
     
     // This method will send the message to the messages database (not in use at the moment)
-    class func sendMessage(message: String?, withCompletion completion: PFBooleanResultBlock) {
+    class func sendMessage(message: String, room_id: String, completion: @escaping (Bool) -> Void) {
+        let currUser: PFUser = PFUser.current()!
+        let userObject: [String] = [currUser.objectId!, currUser.username!, currUser["firstName"] as! String, currUser["lastName"] as! String]
         let newMessage = PFObject(className: "messages")
-        newMessage["text"] = message!
-        newMessage["time_sent"] = Date()
-        newMessage["sent_by_id"] = PFUser.current()
+
+        newMessage["sent_by"] = userObject
+        newMessage["room_id"] = room_id
         newMessage["likes"] = 0
+        newMessage["text"] = message
+        
         newMessage.saveInBackground { (success: Bool, error: Error?) in
             if (success) {
-                print("message sent: " + message!)
+                print("message sent: " + message)
             } else {
                 // check error.description
             }
-            
+            completion(success)
         }
     }
     
@@ -132,7 +136,21 @@ class ParseClient: NSObject {
         }
     }
     
+    class func getRoomMessages(roomId: String, completion: @escaping ([PFObject]) -> Void) {
+        let query = PFQuery(className: "messages")
+        query.whereKey("room_id", equalTo: roomId)
+        query.findObjectsInBackground { (messages: [PFObject]?, error: Error?) in
+            if let messages = messages {
+                print("\(roomId) messages received: \(messages.count)")
+                completion(messages)
+            } else {
+                print (error?.localizedDescription)
+            }
+        }
+    }
     
+    
+    // DEPRECATED
     class func generateUID(length: Int) -> String {
         let letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var uid = ""
