@@ -27,13 +27,14 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     var roomId: String = ""
-    var messages: NSArray!  //[PFObject]?
+    var messages: [PFObject]?
     var usernames: [PFObject]?
     var currentRoom: PFObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
         let query = PFQuery(className: "chatrooms")
         query.whereKey("room_id", equalTo: roomId)
         query.getFirstObjectInBackground { (room: PFObject?, error: Error?) in
@@ -44,6 +45,12 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.tableView.reloadData()
             }
         }
+        */
+        
+        ParseClient.getRoomMessages(roomId: roomId) { (retrievedMessages: [PFObject]) in
+            self.messages = retrievedMessages
+            self.tableView.reloadData()
+        }
         
         refreshEverySecond()
     }
@@ -52,14 +59,23 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         super.didReceiveMemoryWarning()
     }
     
-    func refreshEverySecond() {
+        func refreshEverySecond() {
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ChatRoomViewController.onTimer), userInfo: nil, repeats: true)
         self.tableView.reloadData()
     }
+ 
+    
     
     func onTimer(){
+        ParseClient.getRoomMessages(roomId: roomId) { (retrievedMessages: [PFObject]) in
+            self.messages = retrievedMessages
+            self.tableView.reloadData()
+        }
+        
+        /*
         let query = PFQuery(className: "chatrooms")
        // query.order(byDescending: "createdAt")
+        
         
         query.findObjectsInBackground {
             (objects: [PFObject]?, error: Error?) -> Void in
@@ -72,11 +88,21 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
                 print("Error: \(error!) \(error!.localizedDescription)")
             }
         }
+ */
     }
+    
     
     @IBAction func onSend(_ sender: Any) {
         
         if self.messageTextField.text != "" {
+            ParseClient.sendMessage(message: self.messageTextField.text!, room_id: roomId, completion: { (success: Bool) in
+                if (success) {
+                    print("message sent successfully")
+                    self.messageTextField.text = ""
+                }
+            })
+            
+            /*
             let messageToSend = PFObject()
             messageToSend["text"] = self.messageTextField.text
             messageToSend["user"] = PFUser.current() ?? ""
@@ -90,7 +116,7 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
                     print (error?.localizedDescription)
                 }
             })
-            /*
+            
             messageToSend.saveInBackground {
                 (success: Bool, error: Error?) -> Void in
                 if (!success) {
@@ -118,11 +144,12 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         
         print("message maybe sent")
         let message = messages![indexPath.row]
+        //let userSent = message.value(forKey: "sent_by_id") as! String
+        let userSent = message["sent_by"] as! [String]
         
-    //    print(message)
-    //    cell.messageLabel.text = message.value(forKey: "message") as! String
-        
-        //cell.messageLabel.text = message["text"] as? String
+        cell.messageLabel.text = message.value(forKey: "text") as! String
+        //cell.usernameLabel.text = userSent.value(forKey: "username") as? String
+        cell.usernameLabel.text = userSent[1]
         
       /*  if let user = message["user"] as? PFUser{
             user.fetchInBackground(block: {(user, error) in
