@@ -10,17 +10,10 @@ import UIKit
 import Parse
 
 class ParseClient: NSObject {
-    static var events: [PFObject] = [] {
-        didSet {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "eventsFetched"), object: nil)
-        }
-    }
-    static var users: [PFObject] = [] {
-        didSet {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "usersFetched"), object: nil)
-        }
-    }
+    static var events: [PFObject] = []
+    static var users: [PFObject] = []
     
+    // probably not used anymore
     static var currentUser: PFUser?
     
     // This method will send the message to the messages database (not in use at the moment)
@@ -45,7 +38,7 @@ class ParseClient: NSObject {
     }
     
     // This method will get pull all of the events from the user
-    class func getAllEvents() {
+    class func getAllEvents(completion: @escaping ([PFObject]?) -> ()) {
         let query = PFQuery(className: "events")
         query.order(byDescending: "start_time")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
@@ -55,11 +48,11 @@ class ParseClient: NSObject {
                 print("Successfully retrieved \(objects!.count) events")
                 
                 if let objects = objects {
-                    self.events = objects
+                    completion(objects)
                 }
                 
             } else {
-                self.events = []
+                completion(nil)
             }
         }
     }

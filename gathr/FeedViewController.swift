@@ -19,23 +19,35 @@ class FeedViewController: UIViewController {
 
         tableView.dataSource = self
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "eventsFetched"), object: nil, queue: OperationQueue.main) { (notification: Notification) in
-            self.events = ParseClient.events
-            self.tableView.reloadData()
+        ParseClient.getAllEvents { (receivedEvents: [PFObject]?) in
+            if let receivedEvents = receivedEvents {
+                self.events = receivedEvents
+                self.tableView.reloadData()
+            }
         }
         
-        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(FeedViewController.refreshEvents), userInfo: nil, repeats: true)
-        
-        //refreshEvents()
-        
-        //print("currentUser objectId: \(ParseClient.currentUser!.objectId!)")
-        //print("currentUser user_id: \(ParseClient.currentUser!.value(forKey: "user_id")!)")
+        // creating UIRefreshControl
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshEvents(_:)), for: UIControlEvents.valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
         
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func refreshEvents(_ refreshControl: UIRefreshControl) {
+        ParseClient.getAllEvents { (receivedEvents: [PFObject]?) in
+            if let receivedEvents = receivedEvents {
+                self.events = receivedEvents
+                self.tableView.reloadData()
+            }
+            
+            refreshControl.endRefreshing()
+        }
     }
     
     @IBAction func onLogout(_ sender: Any) {
@@ -48,10 +60,6 @@ class FeedViewController: UIViewController {
         }
         self.dismiss(animated: true, completion: nil)
 
-    }
-    
-    func refreshEvents() {
-        ParseClient.getAllEvents()
     }
 
     
