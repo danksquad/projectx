@@ -28,7 +28,7 @@ https://damp-caverns-14732.herokuapp.com/
 Database Schema:
 
 --User-- <br />
-id: String <br />
+user_id: String <br />
 first_name: String <br />
 last_name: String <br />
 username: String <br />
@@ -36,7 +36,7 @@ password: String <br />
 profile_pic: Image 
 
 --Event-- <br />
-id: String <br />
+room_id: String <br />
 name: String <br />
 start_time: NSDate <br />
 end_time: NSDate <br />
@@ -45,9 +45,7 @@ supplies: Array of Strings <br />
 description: String
 
 --Message-- <br />
-id: String <br />
 time_sent: NSDate <br />
-sent_by_id: String <br />
-sent_to_id: String <br />
+sent_by: String <br />
 likes: Int <br />
 text: String

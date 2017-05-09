@@ -21,17 +21,12 @@ class InvitationViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        //ParseClient.getAllUsers()
-        
+        // grab all of the users
         ParseClient.getAllUsers { (users: [PFObject]) in
             self.users = users
             self.tableView.reloadData()
         }
         
-//        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "usersFetched"), object: nil, queue: OperationQueue.main) { (notification: Notification) in
-//            self.users = ParseClient.users
-//            self.tableView.reloadData()
-//        }
     }
 
     override func didReceiveMemoryWarning() {

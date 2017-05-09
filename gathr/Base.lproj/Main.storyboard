@@ -164,6 +164,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="5Y6-8Y-vfZ" id="xhI-ZG-vvM"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="feedToLoginSegue" id="zwJ-hT-iUX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NZZ-0c-PGN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -396,7 +397,7 @@
                     <navigationItem key="navigationItem" title="Event Details" id="umW-cH-Mf3">
                         <barButtonItem key="rightBarButtonItem" title="Chat" id="mN6-bN-QLb">
                             <connections>
-                                <segue destination="uH1-sS-rr1" kind="show" id="ORJ-hJ-otv"/>
+                                <segue destination="uH1-sS-rr1" kind="show" identifier="toChatroom" id="ORJ-hJ-otv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -964,6 +965,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KEN-su-KWd"/>
+        <segue reference="9yU-1m-loM"/>
     </inferredMetricsTieBreakers>
 </document>

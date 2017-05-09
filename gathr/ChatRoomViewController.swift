@@ -26,11 +26,17 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    var roomId: String = ""
     var messages: [PFObject]?
-    var usernames: [PFObject]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        ParseClient.getRoomMessages(roomId: roomId) { (retrievedMessages: [PFObject]) in
+            self.messages = retrievedMessages
+            self.tableView.reloadData()
+        }
+        
         refreshEverySecond()
     }
 
@@ -38,43 +44,34 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         super.didReceiveMemoryWarning()
     }
     
-    func refreshEverySecond() {
+        func refreshEverySecond() {
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ChatRoomViewController.onTimer), userInfo: nil, repeats: true)
         self.tableView.reloadData()
     }
+ 
+    
     
     func onTimer(){
-        let query = PFQuery(className: "messages")
-        query.order(byDescending: "createdAt")
-        
-        query.findObjectsInBackground {
-            (objects: [PFObject]?, error: Error?) -> Void in
-            
-            if error == nil {
-                self.messages = objects
-                self.tableView.reloadData()
-            } else {
-                // Log details of the failure
-                print("Error: \(error!) \(error!.localizedDescription)")
-            }
+        ParseClient.getRoomMessages(roomId: roomId) { (retrievedMessages: [PFObject]) in
+            self.messages = retrievedMessages
+            self.tableView.reloadData()
         }
     }
     
+    
     @IBAction func onSend(_ sender: Any) {
+        
         if self.messageTextField.text != "" {
-            let messageToSend = PFObject(className: "messages")
-            messageToSend["text"] = self.messageTextField.text
-            messageToSend["user"] = PFUser.current() ?? ""
-            messageToSend.saveInBackground {
-                (success: Bool, error: Error?) -> Void in
-                if (!success) {
-                    print("Error: message not saved")
-                }
-                else {
+            ParseClient.sendMessage(message: self.messageTextField.text!, room_id: roomId, completion: { (success: Bool) in
+                if (success) {
+                    print("message sent successfully")
                     self.messageTextField.text = ""
                 }
-            }
+            })
+            
         }
+        
+        
     }
     
     // MARK: UITableViewDelegate and UITableViewDataSource
@@ -88,14 +85,10 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.selectionStyle = .none
         
         let message = messages![indexPath.row]
-        cell.messageLabel.text = message["text"] as? String
+        let userSent = message["sent_by"] as! [String]
         
-        if let user = message["user"] as? PFUser{
-            user.fetchInBackground(block: {(user, error) in
-                if let user = user as? PFUser{
-                    cell.usernameLabel.text = user.username
-                }})
-        }
+        cell.messageLabel.text = message.value(forKey: "text") as! String
+        cell.usernameLabel.text = userSent[1]
         
         return cell
     }
