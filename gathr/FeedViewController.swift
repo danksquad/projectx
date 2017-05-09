@@ -56,10 +56,11 @@ class FeedViewController: UIViewController {
             if let error = error {
                 print(error.localizedDescription)
             }
-            
+            else {
+                ParseClient.currentUser = nil
+                self.performSegue(withIdentifier: "feedToLoginSegue", sender: nil)
+            }
         }
-        self.dismiss(animated: true, completion: nil)
-
     }
 
     
