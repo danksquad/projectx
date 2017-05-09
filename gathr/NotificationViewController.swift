@@ -7,20 +7,20 @@
 //
 
 import UIKit
+import Parse
 
 class NotificationViewController: UIViewController {
-
-    @IBOutlet weak var eventNameLabel: UILabel!
-    @IBOutlet weak var eventDateLabel: UILabel!
-    @IBOutlet weak var eventTimeLabel: UILabel!
-    @IBOutlet weak var eventHostLabel: UILabel!
-    @IBOutlet weak var eventSeenLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
-    
+    var notifications: [PFObject]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(NotificationViewController.refreshEvents), userInfo: nil, repeats: true)
         // Do any additional setup after loading the view.
     }
 
@@ -30,6 +30,10 @@ class NotificationViewController: UIViewController {
     }
     
 
+    func refreshEvents() {
+        ParseClient.getAllEvents()
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -40,4 +44,61 @@ class NotificationViewController: UIViewController {
     }
     */
 
+}
+
+extension NotificationViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    func loadItems(){
+        let query = PFQuery(className: "notifications")
+        query.order(byDescending: "createdAt")
+    
+        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) -> Void in
+            
+            if error == nil{
+                //succeeded
+                print("Succesfuly retrieved \(objects!.count) events")
+                
+                if let objects = objects{
+                    self.notifications = objects
+                }
+                self.tableView.reloadData()
+            }
+            else{
+                self.notifications = []
+                // Log details of the failure
+                print("Error: \(error!) \(error!.localizedDescription)")
+            }
+        }
+    }
+    
+    
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "notificationsCELL", for: indexPath) as! NotificationCell
+        
+        // getting the labels from the PFObjects
+        let currEventSeenStatus = notifications?[indexPath.row].object(forKey: "seen") as? String
+        let currEventRoom = notifications?[indexPath.row].object(forKey: "room_id") as? String
+        
+        // unwrapping as optional, because we might not have forced event name to be required
+        
+        print(currEventSeenStatus)
+        
+        if let seen = currEventSeenStatus{
+            cell.eventSeenLabel.text = seen
+        }
+        if let room = currEventRoom{
+            cell.eventNameLabel.text = room
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let notifications = notifications{
+            return notifications.count
+        }
+        return 0
+    }
 }
