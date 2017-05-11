@@ -57,6 +57,24 @@ class ParseClient: NSObject {
         }
     }
     
+    
+    // This method will get one event through the room id
+    class func getOneEvent(roomId: String, completion: @escaping ([PFObject]) -> Void){
+        let query = PFQuery(className: "events")
+        query.whereKey("room_id", equalTo: roomId)
+        query.findObjectsInBackground { (event: [PFObject]?, error: Error?) in
+            if let event = event {
+                completion(event)
+            } else {
+                print (error?.localizedDescription as Any)
+            }
+        }
+        
+    }
+    
+    
+    
+    
     // This method will get a list of all the users
     // DEPRECATED: CALLBACK USED INSTEAD
     class func getAllUsers() {
@@ -124,7 +142,7 @@ class ParseClient: NSObject {
                 event.add(user_id, forKey: "invited_users")
                 event.saveInBackground()
             } else {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
             }
         }
     }
@@ -137,7 +155,22 @@ class ParseClient: NSObject {
                 print("\(roomId) messages received: \(messages.count)")
                 completion(messages)
             } else {
-                print (error?.localizedDescription)
+                print (error?.localizedDescription as Any)
+            }
+        }
+    }
+    
+    class func getNotifications(toUser: String, completion: @escaping ([PFObject]) -> Void){
+        let query = PFQuery(className: "notifications")
+        query.whereKey("to_user", equalTo: toUser)
+        query.order(byDescending: "createdAt")
+        query.findObjectsInBackground { (notifications: [PFObject]?, error: Error?) in
+            if let notifications = notifications {
+                print(" \(toUser) Succesfuly retrieved \(notifications.count) notifications")
+                completion(notifications)
+            } else{
+                // Log details of the failure
+                print("Error: \(String(describing: error?.localizedDescription))")
             }
         }
     }
