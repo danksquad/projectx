@@ -8,47 +8,80 @@
 
 import UIKit
 import Parse
+import ParseLiveQuery
+
+let lqClient = ParseLiveQuery.Client()
 
 class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            self.tableView.dataSource = self
-            self.tableView.delegate = self
-        }
-    }
-    
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
-    
-    @IBOutlet weak var sendButton: UIButton! {
-        didSet {
-            self.sendButton.layer.cornerRadius = 5
-        }
-    }
+    @IBOutlet weak var sendButton: UIButton!
     
     var roomId: String = ""
     var messages: [PFObject]?
+    var subscription: Subscription<PFObject>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
+        self.sendButton.layer.cornerRadius = 5
 
         ParseClient.getRoomMessages(roomId: roomId) { (retrievedMessages: [PFObject]) in
             self.messages = retrievedMessages
             self.tableView.reloadData()
+            self.scrollToBottom(animated: true)
         }
-        
-        refreshEverySecond()
+        //refreshEverySecond()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        subscribeRoomMessages()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+    }
+    
         func refreshEverySecond() {
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ChatRoomViewController.onTimer), userInfo: nil, repeats: true)
         self.tableView.reloadData()
     }
- 
+    
+    func subscribeRoomMessages() {
+        print("subscribed to room messages")
+        let query: PFQuery = PFQuery(className: "messages")
+        query.whereKey("room_id", equalTo: roomId)
+        
+        subscription = lqClient.subscribe(query).handle(ParseLiveQuery.Event.created) { _, obj in
+            print("Recieved new message: \(obj.value(forKey: "text")!)")
+            self.messages!.append(obj)
+            self.tableView.reloadData()
+            self.scrollToBottom(animated: true)
+        }
+    }
+    
+    func unsubscribeRoomMessages() {
+        let query: PFQuery = PFQuery(className: "messages")
+        query.whereKey("room_id", equalTo: roomId)
+        lqClient.unsubscribe(query)
+    }
+    
+    func scrollToBottom(animated: Bool) {
+        let numberOfSections = self.tableView.numberOfSections
+        let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections-1)
+        
+        if numberOfRows > 0 {
+            let indexPath = IndexPath(row: numberOfRows-1, section: (numberOfSections-1))
+            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+        }
+    }
     
     
     func onTimer(){

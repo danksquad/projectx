@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ParseLiveQuery
 
 class ParseClient: NSObject {
     static var events: [PFObject] = []
@@ -142,8 +143,19 @@ class ParseClient: NSObject {
         }
     }
     
+    class func subscribeRoomMessages(roomId: String, competion:(([PFObject]) -> Void)) {
+        let query = PFQuery(className: "messages")
+        query.whereKey("room_id", equalTo: roomId)
+        
+        let myquery = PFObject.query()!.whereKey("room_id", equalTo: roomId)
+        let liveQueryClient = ParseLiveQuery.Client()
+        
+        //let subscription: Subscription<PFObject> = liveQueryClient.subscribe(query)
+        
+        //let subscription: Subscription<PFObject> = myquery.subscribe()
+    }
     
-    // DEPRECATED
+    
     class func generateUID(length: Int) -> String {
         let letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var uid = ""

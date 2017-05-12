@@ -20,6 +20,8 @@
 		34D9B7A11EAEF03E0048021C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9B7A01EAEF03E0048021C /* ProfileViewController.swift */; };
 		34D9B7A31EAF07FF0048021C /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9B7A21EAF07FF0048021C /* InvitationViewController.swift */; };
 		34D9B7A51EB162670048021C /* InviteUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9B7A41EB162670048021C /* InviteUserCell.swift */; };
+		34FCEDBD1EC3DF4400C60706 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FCEDBC1EC3DF4400C60706 /* Message.swift */; };
+		34FCEDC11EC6492400C60706 /* Chatroom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FCEDC01EC6492400C60706 /* Chatroom.swift */; };
 		844DF5291EAB244D00C125F4 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DF5281EAB244D00C125F4 /* ChatRoomViewController.swift */; };
 		844DF52B1EAB2A6600C125F4 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DF52A1EAB2A6600C125F4 /* MessageCell.swift */; };
 		84FC2F441EA9BCAE00979676 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC2F431EA9BCAE00979676 /* DetailsViewController.swift */; };
@@ -45,6 +47,8 @@
 		34D9B7A01EAEF03E0048021C /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		34D9B7A21EAF07FF0048021C /* InvitationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		34D9B7A41EB162670048021C /* InviteUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteUserCell.swift; sourceTree = "<group>"; };
+		34FCEDBC1EC3DF4400C60706 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		34FCEDC01EC6492400C60706 /* Chatroom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chatroom.swift; sourceTree = "<group>"; };
 		844DF5281EAB244D00C125F4 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
 		844DF52A1EAB2A6600C125F4 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		84FC2F431EA9BCAE00979676 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 			children = (
 				F0F77B911EA86E3600ADE514 /* Event.swift */,
 				3455DF001EA7E74F002DAE79 /* ParseClient.swift */,
+				34FCEDBC1EC3DF4400C60706 /* Message.swift */,
+				34FCEDC01EC6492400C60706 /* Chatroom.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -249,7 +255,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B61050EDD3452E80E2FD3A29 /* [CP] Copy Pods Resources */ = {
@@ -276,6 +282,7 @@
 			files = (
 				344B8A1C1EA829FB0019687D /* CreateAccountViewController.swift in Sources */,
 				34D9B79E1EA968F70048021C /* EventCell.swift in Sources */,
+				34FCEDC11EC6492400C60706 /* Chatroom.swift in Sources */,
 				343269D61EA5AA2800C923A4 /* LoginViewController.swift in Sources */,
 				34D9B79C1EA93ACD0048021C /* NotificationViewController.swift in Sources */,
 				3455DF011EA7E74F002DAE79 /* ParseClient.swift in Sources */,
@@ -287,6 +294,7 @@
 				F0F77B901EA86E2700ADE514 /* EventViewController.swift in Sources */,
 				34D9B7A11EAEF03E0048021C /* ProfileViewController.swift in Sources */,
 				84FC2F441EA9BCAE00979676 /* DetailsViewController.swift in Sources */,
+				34FCEDBD1EC3DF4400C60706 /* Message.swift in Sources */,
 				34D9B7A51EB162670048021C /* InviteUserCell.swift in Sources */,
 				844DF5291EAB244D00C125F4 /* ChatRoomViewController.swift in Sources */,
 			);

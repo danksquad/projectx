@@ -7,7 +7,14 @@
 //
 
 import UIKit
+import Parse
 
-class Message: NSObject {
+class Message: PFObject {
+    var authorFirstName: String?
+    var authorLastName: String?
+    var authorUser: PFUser?
+    var roomId: String?
+    var likes: Int?
+    var text: String?
 
 }
