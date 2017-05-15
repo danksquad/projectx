@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ParseLiveQuery
 
 class ParseClient: NSObject {
     static var events: [PFObject] = []
@@ -16,7 +17,6 @@ class ParseClient: NSObject {
     // probably not used anymore
     static var currentUser: PFUser?
     
-    // This method will send the message to the messages database (not in use at the moment)
     class func sendMessage(message: String, room_id: String, completion: @escaping (Bool) -> Void) {
         let currUser: PFUser = PFUser.current()!
         let userObject: [String] = [currUser.objectId!, currUser.username!, currUser["firstName"] as! String, currUser["lastName"] as! String]
@@ -175,8 +175,19 @@ class ParseClient: NSObject {
         }
     }
     
+    class func subscribeRoomMessages(roomId: String, competion:(([PFObject]) -> Void)) {
+        let query = PFQuery(className: "messages")
+        query.whereKey("room_id", equalTo: roomId)
+        
+        let myquery = PFObject.query()!.whereKey("room_id", equalTo: roomId)
+        let liveQueryClient = ParseLiveQuery.Client()
+        
+        //let subscription: Subscription<PFObject> = liveQueryClient.subscribe(query)
+        
+        //let subscription: Subscription<PFObject> = myquery.subscribe()
+    }
     
-    // DEPRECATED
+    
     class func generateUID(length: Int) -> String {
         let letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var uid = ""

@@ -15,9 +15,7 @@ As a user, I want to have notifications to remind me when the event is starting,
 
 Optional user stories: <br />
 As a user, I want to be able to see the event I have planned for today in a map view, so I can better arrange I will be throughout the day <br />
-As a host, I want to be able to connect to Facebook, so that I can invite my Facebook friends to the events. <br />
 As a user, I want to be able to see where all of my friends are at the event, so that I can better locate them in a crowd. <br />
-As a user, I want get recommendations of people that have encountered 3 or more times at an event, so that I can make new friends. <br />
 As a user, I want be able to send stickers, so that my conversations are lit. <br />
 As a user, I want to be able to take pictures of the event and save it to a "story", so that I can share the event highlights later on. <br />
 As a host, I want to automatically notify my attendees if they are late to the event, so that they feel guilty.

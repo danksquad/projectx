@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.initialize(with: ParseClientConfiguration(block: {(configuration: ParseMutableClientConfiguration) in
             configuration.applicationId = "projectx"
             configuration.clientKey = "asdbu09gj092q4g0fdfnni&*&Y(*@#ibi2uubr9u2h98&"
-            configuration.server = "https://damp-caverns-14732.herokuapp.com/parse"
+            configuration.server = "https://danksquad-gathr.herokuapp.com/parse"
         }))        
         
         // A user is logged in

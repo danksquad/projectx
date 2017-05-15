@@ -28,6 +28,7 @@ class Event: NSObject {
     
     class func postEvent(name: String?, location: String?, eventDescription: String?, startTime: Date, endTime: Date, withCompletion completion: PFBooleanResultBlock?){
         let roomID = "e_" + ParseClient.generateUID(length: 12)
+        let userId = PFUser.current()?.value(forKey: "user_id") as! String
         
         // Create Parse object PFObject
         let event = PFObject(className: "events")
@@ -38,12 +39,12 @@ class Event: NSObject {
         event["startTime"] = startTime
         event["endTime"] = endTime
         event["room_id"] = roomID
-        event["invited_users"] = [PFUser.current()?.value(forKey: "user_id")]
-        // event.add(ParseClient.currentUser!.value(forKey: "user_id")!, forKey: "invited_users")
+        event["invited_users"] = [userId]
         
         // Save object (following function will save the object in Parse asynchronously)
         event.saveInBackground(block: completion)
         
+        /*
         // Create chatroom
         let chatroom = PFObject(className: "chatrooms")
         
@@ -51,6 +52,7 @@ class Event: NSObject {
         chatroom["messages"] = ["test message"]
         
         chatroom.saveInBackground(block: completion)
+        */
         
     }
     
