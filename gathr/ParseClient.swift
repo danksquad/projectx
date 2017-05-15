@@ -62,14 +62,14 @@ class ParseClient: NSObject {
     class func getOneEvent(roomId: String, completion: @escaping ([PFObject]) -> Void){
         let query = PFQuery(className: "events")
         query.whereKey("room_id", equalTo: roomId)
-        query.findObjectsInBackground { (event: [PFObject]?, error: Error?) in
+        
+       query.getFirstObjectInBackground { (event: PFObject?, error: Error?) in
             if let event = event {
-                completion(event)
+                completion([event])
             } else {
                 print (error?.localizedDescription as Any)
             }
         }
-        
     }
     
     

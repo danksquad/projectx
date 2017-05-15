@@ -10,20 +10,17 @@ import UIKit
 import Parse
 
 class NotificationViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            self.tableView.dataSource = self
-            self.tableView.delegate = self
-        }
-    }
+    @IBOutlet weak var tableView: UITableView!
     
     var notifications: [PFObject]?
-    var event: [PFObject]?
+    var events: [PFObject]?
     var userToken = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+
         //Get current user
         let currentUser = PFUser.current()
         let userId = currentUser?["user_id"]
@@ -31,14 +28,11 @@ class NotificationViewController: UIViewController {
             userToken = userId as! String
         }
        
-        
         ParseClient.getNotifications(toUser: userToken) { (retrievedNotifications: [PFObject]) in
             self.notifications = retrievedNotifications
             self.tableView.reloadData()
-            
         }
         
-       
         // Do any additional setup after loading the view.
     }
 
@@ -78,34 +72,8 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
         
         let notification = notifications![indexPath.row]
         
-        
         // getting the labels from the PFObjects
-        let currEventSeenStatus = notification.value(forKey: "seen") as? DarwinBoolean
-        
-        
-        let currEventName = notification.value(forKey: "room_id") as? String
-       // cell.eventNameLabel.text = currEventName
-
-        let currEventFromUser = notification.value(forKey: "from_user") as? String
-        cell.eventDateLabel.text = currEventFromUser
-        
-        
-        ParseClient.getOneEvent(roomId: currEventName!) { (retrievedEvent:[PFObject]) in
-            self.event = retrievedEvent
-            print("here we go!")
-            
-            let eventName = self.event![indexPath.row]
-        
-            let temp = ""
-            if let temp = eventName.value(forKey: "name"){
-                cell.eventNameLabel.text = temp as? String
-            }
-            print(temp)
-        }
-        
-        
-        // unwrapping as optional, because we might not have forced event name to be required
-        
+        let currEventSeenStatus = notification.object(forKey: "seen") as? Bool;
         if let seen = currEventSeenStatus{
             if(seen == true){
                 cell.eventSeenLabel.text = "Seeeeen ✔"
@@ -114,12 +82,30 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                 cell.eventSeenLabel.text = "Not Seen"
             }
         }
-       // if let name = currEventName{
-           // cell.eventNameLabel.text = name
-       // }
         
-               return cell
+        let currRoomId = notification.value(forKey: "room_id") as? String
         
+        ParseClient.getOneEvent(roomId: currRoomId!) { (retrievedEvent: [PFObject]) in
+            self.events = retrievedEvent
+            let event = self.events![indexPath.section]
+            
+            let currRoomName = event.value(forKey: "name")
+            cell.eventNameLabel.text = currRoomName as? String
+            
+            let currEventDate = event.value(forKey: "_created_at") as? String
+            cell.eventDateLabel.text = currEventDate
+
+        }
+        
+        
+        
+        return cell
+
+        }
+    
+        
+    
+    
     }
     
-}
+
