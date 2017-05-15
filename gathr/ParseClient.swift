@@ -17,7 +17,6 @@ class ParseClient: NSObject {
     // probably not used anymore
     static var currentUser: PFUser?
     
-    // This method will send the message to the messages database (not in use at the moment)
     class func sendMessage(message: String, room_id: String, completion: @escaping (Bool) -> Void) {
         let currUser: PFUser = PFUser.current()!
         let userObject: [String] = [currUser.objectId!, currUser.username!, currUser["firstName"] as! String, currUser["lastName"] as! String]

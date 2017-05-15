@@ -20,6 +20,7 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
     var roomId: String = ""
     var messages: [PFObject]?
     var subscription: Subscription<PFObject>?
+    var chatroom: Chatroom?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,17 +29,18 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.delegate = self
         
         self.sendButton.layer.cornerRadius = 5
-
-        ParseClient.getRoomMessages(roomId: roomId) { (retrievedMessages: [PFObject]) in
-            self.messages = retrievedMessages
+        
+        chatroom = Chatroom(roomId: roomId)
+        
+        chatroom?.getRoomMessages(completion: { (messages: [PFObject]) in
+            self.messages = messages
             self.tableView.reloadData()
             self.scrollToBottom(animated: true)
-        }
-        //refreshEverySecond()
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        subscribeRoomMessages()
+        startNewMessages()
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,33 +48,25 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
+        stopNewMessages()
     }
     
-        func refreshEverySecond() {
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ChatRoomViewController.onTimer), userInfo: nil, repeats: true)
-        self.tableView.reloadData()
-    }
-    
-    func subscribeRoomMessages() {
-        print("subscribed to room messages")
-        let query: PFQuery = PFQuery(className: "messages")
-        query.whereKey("room_id", equalTo: roomId)
-        
-        subscription = lqClient.subscribe(query).handle(ParseLiveQuery.Event.created) { _, obj in
-            print("Recieved new message: \(obj.value(forKey: "text")!)")
-            self.messages!.append(obj)
+    func startNewMessages() {
+        print("start listening to new messages")
+        chatroom?.subscribeRoomMessages(completion: { (newMessage: PFObject) in
+            print("Recieved new message: \(newMessage.value(forKey: "text")!)")
+            self.messages!.append(newMessage)
             self.tableView.reloadData()
             self.scrollToBottom(animated: true)
-        }
+        })
     }
     
-    func unsubscribeRoomMessages() {
-        let query: PFQuery = PFQuery(className: "messages")
-        query.whereKey("room_id", equalTo: roomId)
-        lqClient.unsubscribe(query)
+    func stopNewMessages() {
+        print("stop listening to new messages")
+        chatroom?.unsubscribeRoomMessages()
     }
     
+    // keeps the tableview at the bottom when new messages arrive
     func scrollToBottom(animated: Bool) {
         let numberOfSections = self.tableView.numberOfSections
         let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections-1)
@@ -83,28 +77,15 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    
-    func onTimer(){
-        ParseClient.getRoomMessages(roomId: roomId) { (retrievedMessages: [PFObject]) in
-            self.messages = retrievedMessages
-            self.tableView.reloadData()
-        }
-    }
-    
-    
     @IBAction func onSend(_ sender: Any) {
-        
         if self.messageTextField.text != "" {
-            ParseClient.sendMessage(message: self.messageTextField.text!, room_id: roomId, completion: { (success: Bool) in
+            chatroom?.sendMessage(message: self.messageTextField.text!, completion: { (success: Bool) in
                 if (success) {
                     print("message sent successfully")
                     self.messageTextField.text = ""
                 }
             })
-            
         }
-        
-        
     }
     
     // MARK: UITableViewDelegate and UITableViewDataSource
