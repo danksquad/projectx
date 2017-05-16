@@ -22,6 +22,11 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let darkOrange = UIColor(red: 205/255.0, green: 80/255.0, blue: 0.0, alpha: 1.0)
+        if let navigationBar = navigationController?.navigationBar {
+            navigationBar.tintColor = darkOrange
+        }
+        
         let eventName = event?["name"] as? String
         self.eventName.text = eventName
         

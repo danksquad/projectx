@@ -13,6 +13,7 @@ import ParseLiveQuery
 let lqClient = ParseLiveQuery.Client()
 
 class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
@@ -22,8 +23,14 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
     var subscription: Subscription<PFObject>?
     var chatroom: Chatroom?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let darkOrange = UIColor(red: 205/255.0, green: 80/255.0, blue: 0.0, alpha: 1.0)
+        if let navigationBar = navigationController?.navigationBar {
+            navigationBar.tintColor = darkOrange
+        }
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
