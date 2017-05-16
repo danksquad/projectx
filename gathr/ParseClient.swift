@@ -14,28 +14,7 @@ class ParseClient: NSObject {
     static var events: [PFObject] = []
     static var users: [PFObject] = []
     
-    // probably not used anymore
     static var currentUser: PFUser?
-    
-    class func sendMessage(message: String, room_id: String, completion: @escaping (Bool) -> Void) {
-        let currUser: PFUser = PFUser.current()!
-        let userObject: [String] = [currUser.objectId!, currUser.username!, currUser["firstName"] as! String, currUser["lastName"] as! String]
-        let newMessage = PFObject(className: "messages")
-
-        newMessage["sent_by"] = userObject
-        newMessage["room_id"] = room_id
-        newMessage["likes"] = 0
-        newMessage["text"] = message
-        
-        newMessage.saveInBackground { (success: Bool, error: Error?) in
-            if (success) {
-                print("message sent: " + message)
-            } else {
-                // check error.description
-            }
-            completion(success)
-        }
-    }
     
     // This method will get pull all of the events from the user
     class func getAllEvents(completion: @escaping ([PFObject]?) -> ()) {
@@ -62,33 +41,12 @@ class ParseClient: NSObject {
     class func getOneEvent(roomId: String, completion: @escaping ([PFObject]) -> Void){
         let query = PFQuery(className: "events")
         query.whereKey("room_id", equalTo: roomId)
-        query.findObjectsInBackground { (event: [PFObject]?, error: Error?) in
+        
+       query.getFirstObjectInBackground { (event: PFObject?, error: Error?) in
             if let event = event {
-                completion(event)
+                completion([event])
             } else {
                 print (error?.localizedDescription as Any)
-            }
-        }
-        
-    }
-    
-    
-    
-    
-    // This method will get a list of all the users
-    // DEPRECATED: CALLBACK USED INSTEAD
-    class func getAllUsers() {
-        let query = PFQuery(className: "_User")
-        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
-            
-            if error == nil {
-                print("Successfully pulled \(objects!.count) users")
-                
-                if let objects = objects {
-                    self.users = objects
-                }
-            } else {
-                self.events = []
             }
         }
     }
@@ -107,6 +65,20 @@ class ParseClient: NSObject {
                 }
             } else {
                 self.events = []
+            }
+        }
+    }
+    
+    //this mehtod will get one user through id
+    class func getOneUser(host: String, completion: @escaping ([PFObject]) -> Void){
+        let query = PFQuery(className: "_User")
+        query.whereKey("user_id", equalTo: host)
+        
+        query.getFirstObjectInBackground { (host: PFObject?, error: Error?) in
+            if let host = host {
+                completion([host])
+            } else {
+                print (error?.localizedDescription as Any)
             }
         }
     }
@@ -147,19 +119,6 @@ class ParseClient: NSObject {
         }
     }
     
-    class func getRoomMessages(roomId: String, completion: @escaping ([PFObject]) -> Void) {
-        let query = PFQuery(className: "messages")
-        query.whereKey("room_id", equalTo: roomId)
-        query.findObjectsInBackground { (messages: [PFObject]?, error: Error?) in
-            if let messages = messages {
-                print("\(roomId) messages received: \(messages.count)")
-                completion(messages)
-            } else {
-                print (error?.localizedDescription as Any)
-            }
-        }
-    }
-    
     class func getNotifications(toUser: String, completion: @escaping ([PFObject]) -> Void){
         let query = PFQuery(className: "notifications")
         query.whereKey("to_user", equalTo: toUser)
@@ -174,20 +133,8 @@ class ParseClient: NSObject {
             }
         }
     }
-    
-    class func subscribeRoomMessages(roomId: String, competion:(([PFObject]) -> Void)) {
-        let query = PFQuery(className: "messages")
-        query.whereKey("room_id", equalTo: roomId)
         
-        let myquery = PFObject.query()!.whereKey("room_id", equalTo: roomId)
-        let liveQueryClient = ParseLiveQuery.Client()
-        
-        //let subscription: Subscription<PFObject> = liveQueryClient.subscribe(query)
-        
-        //let subscription: Subscription<PFObject> = myquery.subscribe()
-    }
-    
-    
+    // This method will generate the random userID or eventID
     class func generateUID(length: Int) -> String {
         let letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var uid = ""
@@ -199,6 +146,17 @@ class ParseClient: NSObject {
         }
         
         return uid
+    }
+    
+    class func getPFFileFromImage(image: UIImage?) -> PFFile? {
+        // check if the image i snot nil
+        if let image = image {
+            // get image data and check that it is not nil
+            if let imageData = UIImagePNGRepresentation(image) {
+                return PFFile(name: "image.png", data: imageData)
+            }
+        }
+        return nil
     }
     
 }

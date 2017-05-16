@@ -57,7 +57,7 @@ class FeedViewController: UIViewController {
                 print(error.localizedDescription)
             }
             else {
-                ParseClient.currentUser = nil
+                //ParseClient.currentUser = nil
                 self.performSegue(withIdentifier: "feedToLoginSegue", sender: nil)
             }
         }
@@ -78,11 +78,10 @@ class FeedViewController: UIViewController {
             
             let event = self.events?[(indexPath?.row)!]
             detailsViewController.event = event
+            
+            tableView.deselectRow(at: indexPath!, animated: true)
         }
-        
     }
- 
-
 }
 
 extension FeedViewController: UITableViewDataSource, UITableViewDelegate {

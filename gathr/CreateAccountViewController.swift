@@ -8,17 +8,24 @@
 
 import UIKit
 import Parse
+import AFNetworking
 
 class CreateAccountViewController: UIViewController {
     @IBOutlet weak var fNameField: UITextField!
     @IBOutlet weak var lNameField: UITextField!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var profileImageView: UIImageView!
+    
+    var profileImage: UIImage = #imageLiteral(resourceName: "profile-placeholder")
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.profileImageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView(sender:)))
+        self.profileImageView.addGestureRecognizer(tapGesture)
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,11 +47,12 @@ class CreateAccountViewController: UIViewController {
         newUser["firstName"] = fNameField.text ?? "John"
         newUser["lastName"] = lNameField.text ?? "Smith"
         newUser["user_id"] = user_id
+        newUser["profile_image"] = ParseClient.getPFFileFromImage(image: profileImage)
         
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if success {
                 print("created new user")
-                ParseClient.currentUser = newUser
+                //ParseClient.currentUser = newUser
                 self.performSegue(withIdentifier: "signupSegue", sender: nil)
             } else {
                 
@@ -54,6 +62,16 @@ class CreateAccountViewController: UIViewController {
             }
         }
         
+    }
+    
+    func didTapProfileView(sender: UITapGestureRecognizer) {
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        vc.allowsEditing = true
+        vc.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        
+        self.present(vc, animated: true, completion: nil)
+
     }
     
     func displayErrorDialog(error: Error?) {
@@ -80,4 +98,15 @@ class CreateAccountViewController: UIViewController {
     }
     */
 
+}
+
+extension CreateAccountViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+        self.profileImage = editedImage
+        self.profileImageView.image = editedImage
+        
+        dismiss(animated: true, completion: nil)
+    }
 }

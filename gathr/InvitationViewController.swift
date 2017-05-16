@@ -35,7 +35,9 @@ class InvitationViewController: UIViewController {
     }
     
     func refreshUsers() {
-        ParseClient.getAllUsers()
+        ParseClient.getAllUsers { (users: [PFObject]) in
+            self.users = users
+        }
         
     }
     
@@ -64,6 +66,7 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.firstLastNameLabel.text = currName
         cell.usernameLabel.text = currUsername
+        cell.thisUser = currUser
         
         return cell
     }
@@ -80,8 +83,8 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedUser = users![indexPath.row] as! PFUser
-        
-        ParseClient.sendInvite(from_user: ParseClient.currentUser?.value(forKey: "user_id") as! String?, to_user: selectedUser.value(forKey: "user_id") as! String?, room_id: event?.value(forKey: "room_id") as! String?) { (success: Bool, error: Error?) in
+
+        ParseClient.sendInvite(from_user: PFUser.current()?.value(forKey: "user_id") as! String?, to_user: selectedUser.value(forKey: "user_id") as! String?, room_id: event?.value(forKey: "room_id") as! String?) { (success: Bool, error: Error?) in
             print(selectedUser.value(forKey: "username") as! String)
         }
         displaySentDialog(user: selectedUser.username)
