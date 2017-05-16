@@ -7,11 +7,22 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
 
 class InviteUserCell: UITableViewCell {
     @IBOutlet weak var firstLastNameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var profileView: UIImageView!
+    @IBOutlet weak var profileView: PFImageView!
+    
+    var thisUser: PFObject! {
+        didSet {
+            if let profileImage = thisUser["profile_image"] as! PFFile? {
+                self.profileView.file = profileImage
+                self.profileView.loadInBackground()
+            }
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

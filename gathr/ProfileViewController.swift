@@ -8,9 +8,10 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 class ProfileViewController: UIViewController {
-    @IBOutlet weak var profileView: UIImageView!
+    @IBOutlet weak var profileView: PFImageView!
     @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var lastNameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
@@ -29,7 +30,16 @@ class ProfileViewController: UIViewController {
             if let username = currentUser["username"] as! String? {
                 screenNameLabel.text = ("Username: " + username)
             }
+            
+            if let profileImage = currentUser["profile_image"] as! PFFile? {
+                self.profileView.file = profileImage
+                self.profileView.loadInBackground()
+            }
         }
+        
+        self.profileView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView(sender:)))
+        self.profileView.addGestureRecognizer(tapGesture)
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +47,15 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func didTapProfileView(sender: UITapGestureRecognizer) {
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        vc.allowsEditing = true
+        vc.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        
+        self.present(vc, animated: true, completion: nil)
+        
+    }
 
     /*
     // MARK: - Navigation
@@ -48,4 +67,23 @@ class ProfileViewController: UIViewController {
     }
     */
 
+}
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        let currentUser = PFUser.current()
+
+        self.profileView.image = editedImage
+        currentUser?["profile_image"] = ParseClient.getPFFileFromImage(image: editedImage)
+        currentUser?.saveInBackground(block: { (success: Bool, error: Error?) in
+            if success {
+                print("new profile image saved")
+            } else {
+                print(error?.localizedDescription)
+            }
+        })
+        
+        dismiss(animated: true, completion: nil)
+    }
 }

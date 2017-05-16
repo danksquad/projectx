@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
             } else {
                 if user != nil {
                     print("logged in")
-                    ParseClient.currentUser = user
+                    //ParseClient.currentUser = user
                     self.performSegue(withIdentifier: "loginSegue", sender: nil)
                 }
             }
