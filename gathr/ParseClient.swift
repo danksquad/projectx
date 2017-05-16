@@ -41,14 +41,14 @@ class ParseClient: NSObject {
     class func getOneEvent(roomId: String, completion: @escaping ([PFObject]) -> Void){
         let query = PFQuery(className: "events")
         query.whereKey("room_id", equalTo: roomId)
-        query.findObjectsInBackground { (event: [PFObject]?, error: Error?) in
+        
+       query.getFirstObjectInBackground { (event: PFObject?, error: Error?) in
             if let event = event {
-                completion(event)
+                completion([event])
             } else {
                 print (error?.localizedDescription as Any)
             }
         }
-        
     }
     
     // This method will get a list of all the users
@@ -65,6 +65,20 @@ class ParseClient: NSObject {
                 }
             } else {
                 self.events = []
+            }
+        }
+    }
+    
+    //this mehtod will get one user through id
+    class func getOneUser(host: String, completion: @escaping ([PFObject]) -> Void){
+        let query = PFQuery(className: "_User")
+        query.whereKey("user_id", equalTo: host)
+        
+        query.getFirstObjectInBackground { (host: PFObject?, error: Error?) in
+            if let host = host {
+                completion([host])
+            } else {
+                print (error?.localizedDescription as Any)
             }
         }
     }
