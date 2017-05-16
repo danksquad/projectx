@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import UserNotifications
 
 class NotificationViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -123,7 +124,7 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                     let notification = UILocalNotification()
                     notification.alertBody = "Event notification created!"
                     notification.alertAction = "open"
-                    notification.fireDate = eventStartTime as! Date
+                    notification.fireDate = eventStartTime as? Date
                     notification.soundName = UILocalNotificationDefaultSoundName
                     UIApplication.shared.scheduleLocalNotification(notification)
                     print("Alert Created!")
