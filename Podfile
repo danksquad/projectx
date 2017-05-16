@@ -9,4 +9,5 @@ target 'gathr' do
   pod 'AFNetworking'
   pod 'Parse'
   pod 'ParseLiveQuery'
+  pod 'ParseUI'
 end

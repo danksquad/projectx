@@ -10,7 +10,6 @@ import UIKit
 import Parse
 import ParseLiveQuery
 
-
 class Chatroom: NSObject {
     let lqClient = ParseLiveQuery.Client()
     var roomId: String?
