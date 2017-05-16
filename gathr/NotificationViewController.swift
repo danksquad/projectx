@@ -42,7 +42,6 @@ class NotificationViewController: UIViewController {
     }
     
 
-
     
     /*
     // MARK: - Navigation
@@ -76,10 +75,10 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
         let currEventSeenStatus = notification.object(forKey: "seen") as? Bool;
         if let seen = currEventSeenStatus{
             if(seen == true){
-                cell.eventSeenLabel.text = "Seeeeen ✔"
+                cell.eventSeenLabel.text = "Seen: \(seen)"
             }
             else{
-                cell.eventSeenLabel.text = "Not Seen"
+                cell.eventSeenLabel.text = "Seen: \(seen)"
             }
         }
         
@@ -92,8 +91,16 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
             let currRoomName = event.value(forKey: "name")
             cell.eventNameLabel.text = currRoomName as? String
             
-            let currEventDate = event.value(forKey: "_created_at") as? String
-            cell.eventDateLabel.text = currEventDate
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            formatter.timeStyle = .medium
+            
+            if let eventStartTime = event.value(forKey: "startTime") {
+                cell.eventDateLabel.text = formatter.string(from: eventStartTime as! Date)
+            }
+           
+            //let currEventDate = event.value(forKey: "_created_at") as? String
+            //cell.eventDateLabel.text = currEventDate
 
         }
         
