@@ -515,7 +515,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-8f-Koy">
-                                                    <rect key="frame" x="78" y="8" width="79" height="20.5"/>
+                                                    <rect key="frame" x="78" y="8" width="79" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="0.58866175210000005" blue="0.24414326289999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -530,36 +530,34 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOW-BK-CRr">
                                                     <rect key="frame" x="78" y="37" width="289" height="37"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lEr-sU-wwM">
-                                                            <rect key="frame" x="8" y="8" width="69" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdA-HC-krK">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="69" height="20.5"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                        </stackView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdA-HC-krK">
+                                                            <rect key="frame" x="8" y="8" width="273" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.80269505029999999" green="0.31457109900000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstItem="gdA-HC-krK" firstAttribute="leading" secondItem="SOW-BK-CRr" secondAttribute="leading" constant="8" id="HmM-HQ-t12"/>
-                                                        <constraint firstItem="gdA-HC-krK" firstAttribute="top" secondItem="SOW-BK-CRr" secondAttribute="top" constant="8" id="Qhi-sA-lwi"/>
+                                                        <constraint firstAttribute="bottom" secondItem="gdA-HC-krK" secondAttribute="bottom" constant="8" id="3jK-8f-Ih3"/>
+                                                        <constraint firstItem="gdA-HC-krK" firstAttribute="top" secondItem="SOW-BK-CRr" secondAttribute="top" constant="8" id="C1k-f3-qaK"/>
+                                                        <constraint firstItem="gdA-HC-krK" firstAttribute="leading" secondItem="SOW-BK-CRr" secondAttribute="leading" constant="8" id="Fml-GD-z0Z"/>
+                                                        <constraint firstAttribute="trailing" secondItem="gdA-HC-krK" secondAttribute="trailing" constant="8" id="kbl-bO-JuZ"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="SOW-BK-CRr" firstAttribute="leading" secondItem="Cfa-QE-tWx" secondAttribute="trailing" constant="8" id="0UK-FT-Vpy"/>
-                                                <constraint firstAttribute="bottom" secondItem="SOW-BK-CRr" secondAttribute="bottom" constant="14" id="85J-Vn-Buu"/>
                                                 <constraint firstItem="SOW-BK-CRr" firstAttribute="top" secondItem="FFS-8f-Koy" secondAttribute="bottom" constant="8" id="Cko-d5-mCA"/>
+                                                <constraint firstAttribute="bottom" secondItem="SOW-BK-CRr" secondAttribute="bottom" constant="14" id="DeA-h3-xDH"/>
                                                 <constraint firstItem="FFS-8f-Koy" firstAttribute="leading" secondItem="Cfa-QE-tWx" secondAttribute="trailing" constant="8" id="JUI-cD-7PP"/>
                                                 <constraint firstItem="Cfa-QE-tWx" firstAttribute="top" secondItem="IUr-JE-afp" secondAttribute="top" constant="10" id="L4B-d7-xSE"/>
                                                 <constraint firstItem="FFS-8f-Koy" firstAttribute="top" secondItem="IUr-JE-afp" secondAttribute="top" constant="8" id="dYg-OA-KSA"/>
                                                 <constraint firstItem="SOW-BK-CRr" firstAttribute="top" secondItem="FFS-8f-Koy" secondAttribute="bottom" constant="8" id="joh-Mj-5y6"/>
+                                                <constraint firstAttribute="bottom" secondItem="SOW-BK-CRr" secondAttribute="bottom" constant="14" id="sHb-wW-zOs"/>
                                                 <constraint firstItem="Cfa-QE-tWx" firstAttribute="leading" secondItem="IUr-JE-afp" secondAttribute="leading" constant="10" id="vSq-z0-fhz"/>
                                                 <constraint firstAttribute="trailing" secondItem="SOW-BK-CRr" secondAttribute="trailing" constant="8" id="vuK-dj-dsf"/>
+                                                <constraint firstAttribute="bottom" secondItem="SOW-BK-CRr" secondAttribute="bottom" constant="15" id="x4u-qw-9fV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.4975961538" green="0.4951923077" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
