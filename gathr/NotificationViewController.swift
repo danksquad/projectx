@@ -14,7 +14,10 @@ class NotificationViewController: UIViewController {
     
     var notifications: [PFObject]?
     var events: [PFObject]?
+    var hosts: [PFObject]?
     var userToken = ""
+    var seenMark: Bool?
+    var eventTime: NSDate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,12 +78,27 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
         let currEventSeenStatus = notification.object(forKey: "seen") as? Bool;
         if let seen = currEventSeenStatus{
             if(seen == true){
+                seenMark = true;
                 cell.eventSeenLabel.text = "Seen: \(seen)"
             }
             else{
+                seenMark = false;
                 cell.eventSeenLabel.text = "Seen: \(seen)"
             }
         }
+        
+        let currHost = notification.value(forKey: "from_user") as? String
+        
+        ParseClient.getOneUser(host: currHost!, completion: { ( retrievedHost:[PFObject]) in
+            self.hosts = retrievedHost
+            let host = self.hosts![indexPath.section]
+            
+            if let currHost = host.value(forKey: "firstName"){
+                cell.eventHostNameLabel.text = ("from: \(currHost)")
+            }
+        })
+
+        
         
         let currRoomId = notification.value(forKey: "room_id") as? String
         
@@ -96,21 +114,33 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
             formatter.timeStyle = .medium
             
             if let eventStartTime = event.value(forKey: "startTime") {
+                // self.eventTime = eventStartTime as! NSDate
+                print("\(eventStartTime)")
                 cell.eventDateLabel.text = formatter.string(from: eventStartTime as! Date)
+                
+                
+                if(self.seenMark == false){
+                    let notification = UILocalNotification()
+                    notification.alertBody = "Event notification created!"
+                    notification.alertAction = "open"
+                    notification.fireDate = eventStartTime as! Date
+                    notification.soundName = UILocalNotificationDefaultSoundName
+                    UIApplication.shared.scheduleLocalNotification(notification)
+                    print("Alert Created!")
+                }
+                
+                notification.setValue(true, forKeyPath: "seen")
+                notification.saveInBackground()
             }
-           
-            //let currEventDate = event.value(forKey: "_created_at") as? String
-            //cell.eventDateLabel.text = currEventDate
-
+            
+            
         }
-        
         
         
         return cell
 
         }
     
-        
     
     
     }

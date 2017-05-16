@@ -111,6 +111,20 @@ class ParseClient: NSObject {
         }
     }
     
+    //this mehtod will get one user through id
+    class func getOneUser(host: String, completion: @escaping ([PFObject]) -> Void){
+        let query = PFQuery(className: "_User")
+        query.whereKey("user_id", equalTo: host)
+        
+        query.getFirstObjectInBackground { (host: PFObject?, error: Error?) in
+            if let host = host {
+                completion([host])
+            } else {
+                print (error?.localizedDescription as Any)
+            }
+        }
+    }
+    
     
     // This method will push a notification to the notification database
     class func sendInvite(from_user: String?, to_user: String?, room_id: String?, withCompletion completion: PFBooleanResultBlock) {
