@@ -483,7 +483,7 @@
                                                     <color key="textColor" red="1" green="0.58866175210000005" blue="0.24414326289999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cfa-QE-tWx">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cfa-QE-tWx" customClass="PFImageView">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="nex-gN-Beu"/>
                                                         <constraint firstAttribute="width" constant="60" id="sDQ-lK-nwK"/>
@@ -521,6 +521,7 @@
                                         <connections>
                                             <outlet property="messageContainer" destination="SOW-BK-CRr" id="cd4-zO-0vA"/>
                                             <outlet property="messageLabel" destination="gdA-HC-krK" id="qnl-12-Zg8"/>
+                                            <outlet property="profileImage" destination="Cfa-QE-tWx" id="HXh-F4-j9g"/>
                                             <outlet property="usernameLabel" destination="FFS-8f-Koy" id="eIC-Ow-wiv"/>
                                         </connections>
                                     </tableViewCell>
@@ -901,7 +902,7 @@
                                                     <color key="textColor" red="0.80269505029999999" green="0.31457109900000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P49-aL-luM">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P49-aL-luM" customClass="PFImageView">
                                                     <frame key="frameInset" minX="10" minY="10" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -983,7 +984,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="58t-5D-hPQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="58t-5D-hPQ" customClass="PFImageView">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="4gp-lY-rrV"/>
                                     <constraint firstAttribute="width" constant="200" id="bYM-ra-4aI"/>
