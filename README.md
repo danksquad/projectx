@@ -47,3 +47,10 @@ time_sent: NSDate <br />
 sent_by: String <br />
 likes: Int <br />
 text: String
+
+Image credits:
+
+<a href="https://icons8.com/icon/532/News">News icon credits</a><br />
+<a href="https://icons8.com/icon/23/calendar">Calendar icon credits</a><br />
+<a href="https://icons8.com/icon/3225/user">User icon credits</a><br />
+<a href="https://icons8.com/icon/23265/user-filled">User-filled icon credits</a>

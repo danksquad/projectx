@@ -30,6 +30,7 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         let darkOrange = UIColor(red: 205/255.0, green: 80/255.0, blue: 0.0, alpha: 1.0)
         if let navigationBar = navigationController?.navigationBar {
             navigationBar.tintColor = darkOrange
+            navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: darkOrange]
         }
         
         self.tableView.dataSource = self
