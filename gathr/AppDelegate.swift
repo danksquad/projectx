@@ -18,11 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-            // Enable or disable features based on authorization.
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) {(accepted, error) in
+            if !accepted {
+                print("Notification access denied.")
+            }
         }
-        
         Parse.initialize(with: ParseClientConfiguration(block: {(configuration: ParseMutableClientConfiguration) in
             configuration.applicationId = "projectx"
             configuration.clientKey = "asdbu09gj092q4g0fdfnni&*&Y(*@#ibi2uubr9u2h98&"

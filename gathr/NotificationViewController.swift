@@ -110,6 +110,8 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
             let currRoomName = event.value(forKey: "name")
             cell.eventNameLabel.text = currRoomName as? String
             
+            let currDescription = event.value(forKey: "eventDescription")
+            
             let formatter = DateFormatter()
             formatter.dateStyle = .medium
             formatter.timeStyle = .medium
@@ -121,13 +123,43 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                 
                 
                 if(self.seenMark == false){
-                    let notification = UILocalNotification()
+                    /*let notification = UILocalNotification()
                     notification.alertBody = "Event notification created!"
                     notification.alertAction = "open"
                     notification.fireDate = eventStartTime as? Date
                     notification.soundName = UILocalNotificationDefaultSoundName
                     UIApplication.shared.scheduleLocalNotification(notification)
-                    print("Alert Created!")
+                    print("Alert Created!")*/
+                    
+                    //////NEW SWIFT SYNTAX///////
+                    
+                    //defining notification contents
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: eventStartTime as! DateComponents, repeats: false)
+                    let content = UNMutableNotificationContent()
+                    content.title = currRoomName as! String
+                    content.body = currDescription as! String
+                    content.sound = UNNotificationSound.default()
+                    
+                    //adding image
+                    if let path = Bundle.main.path(forResource: "AppIcon", ofType: "png") {
+                        let url = URL(fileURLWithPath: path)
+                        
+                        do {
+                            let attachment = try UNNotificationAttachment(identifier: "AppIcon", url: url, options: nil)
+                            content.attachments = [attachment]
+                        } catch {
+                            print("The attachment was not loaded.")
+                        }
+                    }
+                    
+                    //making notification request
+                    let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
+                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                    UNUserNotificationCenter.current().add(request) {(error) in
+                        if let error = error {
+                            print("Uh oh! We had an error: \(error)")
+                        }
+                    }
                 }
                 
                 notification.setValue(true, forKeyPath: "seen")
