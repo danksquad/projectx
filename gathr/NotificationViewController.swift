@@ -141,16 +141,16 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                     content.sound = UNNotificationSound.default()
                     
                     //adding image
-                    if let path = Bundle.main.path(forResource: "AppIcon", ofType: "png") {
+                  /*  if let path = Bundle.main.path(forResource: "60x60", ofType: "png") {
                         let url = URL(fileURLWithPath: path)
                         
                         do {
-                            let attachment = try UNNotificationAttachment(identifier: "AppIcon", url: url, options: nil)
+                            let attachment = try UNNotificationAttachment(identifier: "60x60", url: url, options: nil)
                             content.attachments = [attachment]
                         } catch {
                             print("The attachment was not loaded.")
                         }
-                    }
+                    }*/
                     
                     //making notification request
                     let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
@@ -159,6 +159,7 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                         if let error = error {
                             print("Uh oh! We had an error: \(error)")
                         }
+                        print("Alert Created!")
                     }
                 }
                 
