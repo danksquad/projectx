@@ -163,8 +163,8 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                     }
                 }
                 
-                notification.setValue(true, forKeyPath: "seen")
-                notification.saveInBackground()
+                //notification.setValue(true, forKeyPath: "seen")
+                //notification.saveInBackground()
             }
             
             
