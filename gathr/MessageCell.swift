@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import ParseUI
 
 class MessageCell: UITableViewCell {
 
-    @IBOutlet weak var profileImage: UIImageView! {
+    @IBOutlet weak var profileImage: PFImageView! {
         didSet {
             self.profileImage.layer.cornerRadius = 5
         }
