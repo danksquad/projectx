@@ -160,6 +160,16 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                             print("Uh oh! We had an error: \(error)")
                         }
                         print("Alert Created!")
+                        // create the controller
+                        let messageController = UIAlertController(title: "Notification Created!", message: "Notification Created for \(currRoomName!)", preferredStyle: .alert)
+                        
+                        // create an OK action
+                        let OKAction = UIAlertAction(title: "OK", style: .default)
+                        
+                        // add the OK action to the alert controller
+                        messageController.addAction(OKAction)
+                        
+                        self.present(messageController, animated: true)
                     }
                 }
                 
