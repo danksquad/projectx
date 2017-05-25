@@ -10,4 +10,5 @@ target 'gathr' do
   pod 'Parse'
   pod 'ParseLiveQuery'
   pod 'ParseUI'
+  pod 'IQKeyboardManagerSwift'
 end
