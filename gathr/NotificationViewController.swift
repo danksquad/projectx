@@ -138,8 +138,9 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
             formatter.timeStyle = .medium
             
             if let eventStartTime = event.value(forKey: "startTime") {
-                // self.eventTime = eventStartTime as! NSDate
-                print("\(eventStartTime)")
+                self.eventTime = eventStartTime as? NSDate
+                print("getting date!")
+                print(eventStartTime)
                 cell.eventDateLabel.text = formatter.string(from: eventStartTime as! Date)
                 
                 
@@ -150,7 +151,7 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                      notification.alertTitle = currRoomName as! String
                      notification.alertBody = currDescription as! String
                      notification.alertAction = "open"
-                     notification.fireDate = eventStartTime as? Date
+                     notification.fireDate = self.eventTime as Date?
                      notification.soundName = UILocalNotificationDefaultSoundName
                      UIApplication.shared.scheduleLocalNotification(notification)
                      print("Alert Created!") /*
