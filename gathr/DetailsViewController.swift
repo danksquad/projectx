@@ -8,9 +8,12 @@
 
 import UIKit
 import Parse
+import GoogleMaps
 
 class DetailsViewController: UIViewController {
-
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var eventCoverView: UIImageView!
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var eventStartTime: UILabel!
     @IBOutlet weak var eventEndTime: UILabel!
@@ -56,6 +59,9 @@ class DetailsViewController: UIViewController {
         self.eventDescription.text = eventDescription
         
         print("details for room_id: \(event!.value(forKey: "room_id")!)")
+        
+        // set up for mapView
+        
     }
 
     override func didReceiveMemoryWarning() {

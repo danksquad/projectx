@@ -17,8 +17,10 @@ class Event: NSObject {
     var startTime: Date
     var endTime: Date
     var roomID: String?
+    var locationLong: Int?
+    var locationLat: Int?
     
-    init(name: String, location: String,eventDescription: String, startTime: Date, endTime: Date){
+    init(name: String, location: String,eventDescription: String, startTime: Date, endTime: Date) {
         self.name = name
         self.location = location
         self.eventDescription = eventDescription
