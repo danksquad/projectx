@@ -19,7 +19,7 @@ class ParseClient: NSObject {
     // This method will get pull all of the events from the user
     class func getAllEvents(completion: @escaping ([PFObject]?) -> ()) {
         let query = PFQuery(className: "events")
-        query.order(byDescending: "start_time")
+        query.order(byAscending: "start_time")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             
             if error == nil {
