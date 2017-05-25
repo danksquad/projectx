@@ -147,14 +147,14 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                 if(self.seenMark == false){
                     print("Alert Created!")
 
-                     let notification = UILocalNotification()
+                     /*let notification = UILocalNotification()
                      notification.alertTitle = currRoomName as! String
                      notification.alertBody = currDescription as! String
                      notification.alertAction = "open"
                      notification.fireDate = self.eventTime as Date?
                      notification.soundName = UILocalNotificationDefaultSoundName
                      UIApplication.shared.scheduleLocalNotification(notification)
-                     print("Alert Created!") /*
+                     print("Alert Created!") */
                     
                     //////NEW SWIFT SYNTAX///////
                     
@@ -183,7 +183,7 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                         if let error = error {
                             print("Uh oh! We had an error: \(error)")
                         }
-                    }*/
+                    }
                     print("Alert Created!")
                     // create the controller
                     let messageController = UIAlertController(title: "Notification Created!", message: "Notification Created for \(currRoomName!)", preferredStyle: .alert)
