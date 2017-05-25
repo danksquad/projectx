@@ -10,6 +10,8 @@ import UIKit
 import Parse
 import UserNotifications
 import IQKeyboardManagerSwift
+import GooglePlaces
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,16 +26,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
+        // For user notifications
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) {(accepted, error) in
             if !accepted {
                 print("Notification access denied.")
             }
         }
+        
+        // Parse API key
         Parse.initialize(with: ParseClientConfiguration(block: {(configuration: ParseMutableClientConfiguration) in
             configuration.applicationId = "projectx"
             configuration.clientKey = "asdbu09gj092q4g0fdfnni&*&Y(*@#ibi2uubr9u2h98&"
             configuration.server = "https://danksquad-gathr.herokuapp.com/parse"
         }))        
+        
+        // Google Places API key
+        GMSPlacesClient.provideAPIKey("AIzaSyCNXlpUPWqc-v6-kLqmKzx-_gTMGGkWSIA")
+        GMSServices.provideAPIKey("AIzaSyCNXlpUPWqc-v6-kLqmKzx-_gTMGGkWSIA")
         
         // A user is logged in
         if PFUser.current() != nil {

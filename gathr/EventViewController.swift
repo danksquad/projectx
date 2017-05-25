@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import GooglePlacePicker
 
 class EventViewController: UIViewController {
     
@@ -76,6 +77,26 @@ class EventViewController: UIViewController {
             }
             
             dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    // Use Google Place Picker widget to select location
+    @IBAction func pickPlace(_ sender: UIButton) {
+        let config = GMSPlacePickerConfig(viewport: nil)
+        let placePicker = GMSPlacePicker(config: config)
+        
+        placePicker.pickPlace { (place: GMSPlace?, error: Error?) in
+            if let error = error {
+                print("GooglePlacePicker error: \(error.localizedDescription)")
+                return
+            }
+            
+            if let place = place {
+                print("Location picked: \(place.name), \(place.formattedAddress)")
+                self.locationTextField.text = place.formattedAddress
+            } else {
+                print("No place selected")
+            }
         }
     }
 
