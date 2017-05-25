@@ -50,6 +50,9 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
             self.tableView.reloadData()
             self.scrollToBottom(animated: true)
         })
+        
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
+//        view.addGestureRecognizer(tap)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,12 +63,12 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        stopNewMessages()
-    }
-    
     func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        stopNewMessages()
     }
     
     func startNewMessages() {
