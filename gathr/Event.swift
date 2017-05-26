@@ -28,7 +28,7 @@ class Event: NSObject {
         self.endTime = endTime
     }
     
-    class func postEvent(name: String?, location: String?, eventDescription: String?, startTime: Date, endTime: Date, withCompletion completion: PFBooleanResultBlock?){
+    class func postEvent(name: String?, location: String?, eventDescription: String?, startTime: Date, endTime: Date, locationLong: Double?, locationLat:Double?, withCompletion completion: PFBooleanResultBlock?){
         let roomID = "e_" + ParseClient.generateUID(length: 12)
         let userId = PFUser.current()?.value(forKey: "user_id") as! String
         
@@ -42,6 +42,20 @@ class Event: NSObject {
         event["endTime"] = endTime
         event["room_id"] = roomID
         event["invited_users"] = [userId]
+        
+        if let locationLong = locationLong {
+            event["location_long"] = locationLong
+            event["location_lat"] = locationLat!
+            print("locationLong: \(locationLong)")
+            print("locationLat: \(locationLat!)")
+        } else {
+            print("no location saved")
+            event["location_long"] = 0
+            event["location_lat"] = 0
+        }
+        
+
+
         
         // Save object (following function will save the object in Parse asynchronously)
         event.saveInBackground(block: completion)

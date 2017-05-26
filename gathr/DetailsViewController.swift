@@ -19,6 +19,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var eventEndTime: UILabel!
     @IBOutlet weak var eventLocation: UILabel!
     @IBOutlet weak var eventDescription: UILabel!
+    @IBOutlet weak var mapView: GMSMapView!
     
     var event: PFObject? 
     
@@ -58,9 +59,16 @@ class DetailsViewController: UIViewController {
         let eventDescription = event?["eventDescription"] as? String
         self.eventDescription.text = eventDescription
         
+        let eventLong = event?["location_long"] as? Int
+        let eventLat = event?["location_lat"] as? Int
+        
         print("details for room_id: \(event!.value(forKey: "room_id")!)")
         
         // set up for mapView
+        
+        let camera = GMSCameraPosition.camera(withLatitude: 1.285, longitude: 103.848, zoom: 12)
+        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
+        mapView.mapType = kGMSTypeNormal
         
     }
 
@@ -69,7 +77,11 @@ class DetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func viewDidLayoutSubviews() {
+        scrollView.isScrollEnabled = true
+        scrollView.contentSize = CGSize(width: 0, height: 2300)
+    }
+    
     
     // MARK: - Navigation
 

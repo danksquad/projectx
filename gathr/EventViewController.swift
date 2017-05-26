@@ -18,6 +18,9 @@ class EventViewController: UIViewController {
     @IBOutlet weak var endTimeDatePicker: UIDatePicker!
     @IBOutlet weak var descriptionTextField: UITextField!
     
+    var locationLong: Double?
+    var locationLat: Double?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let darkOrange = UIColor(red: 205/255.0, green: 80/255.0, blue: 0.0, alpha: 1.0)
@@ -63,7 +66,7 @@ class EventViewController: UIViewController {
             let endTimeToEvent = self.endTimeDatePicker.date
             let descriptionToEvent = self.descriptionTextField.text
             
-            Event.postEvent(name: nameToEvent, location: locationToEvent, eventDescription: descriptionToEvent, startTime: startTimeToEvent, endTime: endTimeToEvent) { (success: Bool, error: Error?) in
+            Event.postEvent(name: nameToEvent, location: locationToEvent, eventDescription: descriptionToEvent, startTime: startTimeToEvent, endTime: endTimeToEvent, locationLong: locationLong, locationLat: locationLat) { (success: Bool, error: Error?) in
                 if success {
                     print("Created Event")
                     self.nameTextField.text = ""
@@ -94,6 +97,9 @@ class EventViewController: UIViewController {
             if let place = place {
                 print("Location picked: \(place.name), \(place.formattedAddress)")
                 self.locationTextField.text = place.formattedAddress
+                self.locationLong = Double(place.coordinate.longitude)
+                self.locationLat = Double(place.coordinate.latitude)
+                
             } else {
                 print("No place selected")
             }
