@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import GooglePlacePicker
 
-class EventViewController: UIViewController {
+class EventViewController: UIViewController, UITextFieldDelegate{
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
@@ -30,6 +30,26 @@ class EventViewController: UIViewController {
         }
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        nameTextField.delegate = self
+        nameTextField.tag = 0 //Increment accordingly
+        locationTextField.delegate = self
+        locationTextField.tag = 1
+        descriptionTextField.delegate = self
+        descriptionTextField.tag = 2 //Increment accordingly
+    
+
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        // Try to find next responder
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            // Not found, so remove keyboard.
+            textField.resignFirstResponder()
+        }
+        // Do not add a line break
+        return false
     }
 
     override func didReceiveMemoryWarning() {

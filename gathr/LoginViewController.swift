@@ -9,9 +9,11 @@
 import UIKit
 import Parse
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var createAccountButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +22,31 @@ class LoginViewController: UIViewController {
             navigationBar.tintColor = darkOrange
             navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: darkOrange]
         }
+        createAccountButton.layer.cornerRadius = 5
+        loginButton.layer.cornerRadius = 5
+        usernameField.delegate = self
+        usernameField.tag = 0 //Increment accordingly
+        passwordField.delegate = self
+        passwordField.tag = 1
+
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
 
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        // Try to find next responder
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            // Not found, so remove keyboard.
+            textField.resignFirstResponder()
+        }
+        // Do not add a line break
+        return false
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
