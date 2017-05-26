@@ -159,7 +159,6 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                     //////NEW SWIFT SYNTAX///////
                     
                     //defining notification contents
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: eventStartTime as! DateComponents, repeats: false)
                     let content = UNMutableNotificationContent()
                     content.title = currRoomName as! String
                     content.body = currDescription as! String
@@ -178,10 +177,12 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                      }*/
                     
                     //making notification request
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: eventStartTime as! DateComponents, repeats: false)
                     let request = UNNotificationRequest(identifier: currRoomName as! String, content: content, trigger: trigger)
+                    UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
                     UNUserNotificationCenter.current().add(request) {(error) in
-                        if let error = error {
-                            print("Uh oh! We had an error: \(error)")
+                        if (error != nil){
+                            print(error?.localizedDescription)
                         }
                     }
                     print("Alert Created!")
