@@ -15,13 +15,17 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var eventCoverView: UIImageView!
     @IBOutlet weak var eventName: UILabel!
-    @IBOutlet weak var eventStartTime: UILabel!
-    @IBOutlet weak var eventEndTime: UILabel!
+    @IBOutlet weak var eventStartDate: UILabel!
+    @IBOutlet weak var eventEndDate: UILabel!
     @IBOutlet weak var eventLocation: UILabel!
     @IBOutlet weak var eventDescription: UILabel!
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var eventEndTime: UILabel!
+    @IBOutlet weak var eventStartTime: UILabel!
     
-    var event: PFObject? 
+    var event: PFObject?
+    var eventLong: CLLocationDegrees?
+    var eventLat: CLLocationDegrees?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,22 +39,29 @@ class DetailsViewController: UIViewController {
         let eventName = event?["name"] as? String
         self.eventName.text = eventName
         
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .medium
-        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US")
         if let eventStartTime = event?["startTime"] {
-            self.eventStartTime.text = formatter.string(from: eventStartTime as! Date)
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            self.eventStartDate.text = dateFormatter.string(from: eventStartTime as! Date)
+
+            dateFormatter.dateFormat = "h:mm a"
+            self.eventStartTime.text = dateFormatter.string(from: eventStartTime as! Date)
         }
         else {
             self.eventStartTime.text = "Unspecified"
         }
         
         if let eventEndTime = event?["endTime"] {
-            self.eventEndTime.text = formatter.string(from: eventEndTime as! Date)
+            
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            self.eventEndDate.text = dateFormatter.string(from: eventEndTime as! Date)
+            
+            dateFormatter.dateFormat = "h:mm a"
+            self.eventEndTime.text = dateFormatter.string(from: eventEndTime as! Date)
         }
         else {
-            self.eventEndTime.text = "Unspecified"
+            self.eventEndDate.text = "Unspecified"
         }
         
         let eventLocation = event?["location"] as? String
@@ -59,17 +70,30 @@ class DetailsViewController: UIViewController {
         let eventDescription = event?["eventDescription"] as? String
         self.eventDescription.text = eventDescription
         
-        let eventLong = event?["location_long"] as? Int
-        let eventLat = event?["location_lat"] as? Int
+        if let eventLong = event?["location_long"] {
+            self.eventLong = eventLong as? CLLocationDegrees
+        }
+        
+        if let eventLat = event?["location_lat"] {
+            self.eventLat = eventLat as? CLLocationDegrees
+        }
         
         print("details for room_id: \(event!.value(forKey: "room_id")!)")
         
-        // set up for mapView
-        
-        let camera = GMSCameraPosition.camera(withLatitude: 1.285, longitude: 103.848, zoom: 12)
-        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
-        mapView.mapType = kGMSTypeNormal
-        
+        // Setup for mapView
+        self.mapView.isHidden = true
+        if eventLong != nil && eventLat != nil && eventLong != 0 && eventLat != 0 {
+            let camera = GMSCameraPosition.camera(withLatitude: eventLat!, longitude: eventLong!, zoom: 17)
+            self.mapView.camera = camera
+            self.mapView.mapType = kGMSTypeNormal
+            self.mapView.isMyLocationEnabled = true
+            
+            let marker = GMSMarker()
+            marker.position = CLLocationCoordinate2D(latitude: eventLat!, longitude: eventLong!)
+            marker.map = self.mapView
+            
+            self.mapView.isHidden = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,9 +103,7 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         scrollView.isScrollEnabled = true
-        scrollView.contentSize = CGSize(width: 0, height: 2300)
     }
-    
     
     // MARK: - Navigation
 

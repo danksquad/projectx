@@ -96,7 +96,7 @@ class EventViewController: UIViewController {
             
             if let place = place {
                 print("Location picked: \(place.name), \(place.formattedAddress)")
-                self.locationTextField.text = place.formattedAddress
+                self.locationTextField.text = "\(place.name), \(place.formattedAddress!)"
                 self.locationLong = Double(place.coordinate.longitude)
                 self.locationLat = Double(place.coordinate.latitude)
                 

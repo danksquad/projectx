@@ -42,6 +42,7 @@ class Event: NSObject {
         event["endTime"] = endTime
         event["room_id"] = roomID
         event["invited_users"] = [userId]
+        event["created_by"] = userId
         
         if let locationLong = locationLong {
             event["location_long"] = locationLong
