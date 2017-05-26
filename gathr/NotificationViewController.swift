@@ -98,17 +98,7 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
         let notification = notifications![indexPath.row]
         
         // getting the labels from the PFObjects
-        let currEventSeenStatus = notification.object(forKey: "seen") as? Bool;
-        if let seen = currEventSeenStatus{
-            if(seen == true){
-                seenMark = true;
-                cell.eventSeenLabel.text = "Seen: \(seen)"
-            }
-            else{
-                seenMark = false;
-                cell.eventSeenLabel.text = "Seen: \(seen)"
-            }
-        }
+        
         
         let currHost = notification.value(forKey: "from_user") as? String
         
@@ -139,22 +129,33 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
             
             if let eventStartTime = event.value(forKey: "startTime") {
                 self.eventTime = eventStartTime as? NSDate
-                print("getting date!")
-                print(eventStartTime)
+               // print("getting date!")
+               // print(eventStartTime)
                 cell.eventDateLabel.text = formatter.string(from: eventStartTime as! Date)
                 
                 
-                if(self.seenMark == false){
+                let currEventSeenStatus = notification.object(forKey: "seen") as? Bool;
+                if let seen = currEventSeenStatus{
+                    if(seen == true){
+                        self.seenMark = true;
+                        cell.eventSeenLabel.text = "Seen: \(seen)"
+                    }
+                    else{
+                        self.seenMark = false;
+                        cell.eventSeenLabel.text = "Seen: \(seen)"
+                  //  }
+              //  }
+               // if(self.seenMark == false){
                     print("Alert Created!")
-
-                     /*let notification = UILocalNotification()
+                    
+                    let notification = UILocalNotification()
                      notification.alertTitle = currRoomName as! String
                      notification.alertBody = currDescription as! String
                      notification.alertAction = "open"
                      notification.fireDate = self.eventTime as Date?
                      notification.soundName = UILocalNotificationDefaultSoundName
                      UIApplication.shared.scheduleLocalNotification(notification)
-                     print("Alert Created!") */
+                     print("Alert Created!") /*
                     
                     //////NEW SWIFT SYNTAX///////
                     
@@ -184,7 +185,7 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                         if (error != nil){
                             print(error?.localizedDescription)
                         }
-                    }
+                    }*/
                     print("Alert Created!")
                     // create the controller
                     let messageController = UIAlertController(title: "Notification Created!", message: "Notification Created for \(currRoomName!)", preferredStyle: .alert)
@@ -200,6 +201,7 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                 
                 notification.setValue(true, forKeyPath: "seen")
                 notification.saveInBackground()
+            }
             }
             
         }
