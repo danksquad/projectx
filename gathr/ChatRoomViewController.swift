@@ -23,9 +23,14 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
     var subscription: Subscription<PFObject>?
     var chatroom: Chatroom?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 200
+    
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ChatRoomViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         
         let darkOrange = UIColor(red: 205/255.0, green: 80/255.0, blue: 0.0, alpha: 1.0)
         if let navigationBar = navigationController?.navigationBar {
@@ -46,8 +51,8 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
             self.scrollToBottom(animated: true)
         })
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
+//        view.addGestureRecognizer(tap)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -96,8 +101,10 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         if self.messageTextField.text != "" {
             chatroom?.sendMessage(message: self.messageTextField.text!, completion: { (success: Bool) in
                 if (success) {
-                    print("message sent successfully")
+                    print("Message sent successfully")
                     self.messageTextField.text = ""
+                    self.dismissKeyboard()
+                    self.tableView.reloadData()
                 }
             })
         }
@@ -121,16 +128,5 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         
         return cell
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import GooglePlacePicker
 
 class EventViewController: UIViewController {
     
@@ -16,6 +17,9 @@ class EventViewController: UIViewController {
     @IBOutlet weak var startTimeDatePicker: UIDatePicker!
     @IBOutlet weak var endTimeDatePicker: UIDatePicker!
     @IBOutlet weak var descriptionTextField: UITextField!
+    
+    var locationLong: Double?
+    var locationLat: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +66,7 @@ class EventViewController: UIViewController {
             let endTimeToEvent = self.endTimeDatePicker.date
             let descriptionToEvent = self.descriptionTextField.text
             
-            Event.postEvent(name: nameToEvent, location: locationToEvent, eventDescription: descriptionToEvent, startTime: startTimeToEvent, endTime: endTimeToEvent) { (success: Bool, error: Error?) in
+            Event.postEvent(name: nameToEvent, location: locationToEvent, eventDescription: descriptionToEvent, startTime: startTimeToEvent, endTime: endTimeToEvent, locationLong: locationLong, locationLat: locationLat) { (success: Bool, error: Error?) in
                 if success {
                     print("Created Event")
                     self.nameTextField.text = ""
@@ -76,6 +80,29 @@ class EventViewController: UIViewController {
             }
             
             dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    // Use Google Place Picker widget to select location
+    @IBAction func pickPlace(_ sender: UIButton) {
+        let config = GMSPlacePickerConfig(viewport: nil)
+        let placePicker = GMSPlacePicker(config: config)
+        
+        placePicker.pickPlace { (place: GMSPlace?, error: Error?) in
+            if let error = error {
+                print("GooglePlacePicker error: \(error.localizedDescription)")
+                return
+            }
+            
+            if let place = place {
+                print("Location picked: \(place.name), \(place.formattedAddress)")
+                self.locationTextField.text = place.formattedAddress
+                self.locationLong = Double(place.coordinate.longitude)
+                self.locationLat = Double(place.coordinate.latitude)
+                
+            } else {
+                print("No place selected")
+            }
         }
     }
 

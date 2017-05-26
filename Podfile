@@ -10,4 +10,8 @@ target 'gathr' do
   pod 'Parse'
   pod 'ParseLiveQuery'
   pod 'ParseUI'
+  pod 'IQKeyboardManagerSwift'
+  pod 'GooglePlaces'
+  pod 'GooglePlacePicker'
+  pod 'GoogleMaps'
 end
