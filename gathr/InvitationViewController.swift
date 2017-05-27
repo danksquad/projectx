@@ -24,8 +24,11 @@ class InvitationViewController: UIViewController {
             navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: darkOrange]
         }
         
-        tableView.dataSource = self
-        tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.separatorColor = UIColor.black
+        self.tableView.separatorInset = UIEdgeInsets.zero
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         // grab all of the users
         ParseClient.getAllUsers { (users: [PFObject]) in

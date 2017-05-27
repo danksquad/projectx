@@ -30,6 +30,9 @@ class NotificationViewController: UIViewController {
         }
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableView.separatorColor = UIColor.black
+        self.tableView.separatorInset = UIEdgeInsets.zero
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         //Set Refresh Control
         let refreshControl = UIRefreshControl()
