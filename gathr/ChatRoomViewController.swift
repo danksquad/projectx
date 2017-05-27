@@ -123,18 +123,7 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         
         cell.messageLabel.text = message.value(forKey: "text") as? String
         cell.usernameLabel.text = ("\(userSent[2]) \(userSent[3]) (\(userSent[1]))")
-        
-        var query = PFQuery(className:"_User")
-        query.getObjectInBackground(withId: "\(userSent[0])") {
-            (currUser: PFObject?, error: Error?) -> Void in
-            if let profileImage = currUser?["profile_image"] as! PFFile? {
-                cell.profileImage.file = profileImage
-                cell.profileImage.loadInBackground()
-            }
-            else {
-                print(error)
-            }
-        }
+        cell.objectId = userSent[0]
         
         return cell
     }

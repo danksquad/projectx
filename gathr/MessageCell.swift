@@ -17,6 +17,25 @@ class MessageCell: UITableViewCell {
         }
     }
     
+    var objectId: String! {
+        didSet {
+            var query = PFQuery(className:"_User")
+            query.getObjectInBackground(withId: objectId) {
+                (currUser: PFObject?, error: Error?) -> Void in
+                if let profileImage = currUser?["profile_image"] as! PFFile? {
+                    self.profileImage.file = profileImage
+                    self.profileImage.loadInBackground()
+                }
+                else {
+                    print(error)
+                }
+            }
+
+        }
+        
+        
+    }
+    
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     

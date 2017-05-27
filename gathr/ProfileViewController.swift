@@ -63,7 +63,18 @@ class ProfileViewController: UIViewController {
         
     }
 
-    @IBOutlet var onLogout: UIBarButtonItem!
+    @IBAction func onLogout(_ sender: Any) {
+        print("user logged out")
+        PFUser.logOutInBackground { (error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                //ParseClient.currentUser = nil
+                self.performSegue(withIdentifier: "feedBackToLoginSegue", sender: nil)
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 
