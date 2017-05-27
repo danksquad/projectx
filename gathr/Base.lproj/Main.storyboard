@@ -807,7 +807,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4oG-V8-jxK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Feed" image="NewsIcon25" id="M7D-E6-ga6"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CDm-hD-HtF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CDm-hD-HtF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -825,7 +825,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CreateAccountNC" automaticallyAdjustsScrollViewInsets="NO" id="vwv-lX-fZ6" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G9d-6D-sXn">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="G9d-6D-sXn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -932,7 +932,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NXz-sf-IOG">
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NXz-sf-IOG">
                                                 <rect key="frame" x="335" y="200" width="30" height="30"/>
                                                 <state key="normal" title="Map">
                                                     <color key="titleColor" red="0.80269505029999999" green="0.31457109900000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1066,7 +1066,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstName LastName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgm-E1-gka">
-                                                    <rect key="frame" x="75" y="11" width="197" height="26"/>
+                                                    <rect key="frame" x="75" y="10.5" width="197" height="26"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                     <color key="textColor" red="0.80269505029999999" green="0.31457109900000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1079,7 +1079,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YhC-OF-avG">
-                                                    <rect key="frame" x="75" y="40" width="79" height="21"/>
+                                                    <rect key="frame" x="75" y="39.5" width="79" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1129,7 +1129,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="27w-nH-QAG" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0GW-wV-dvk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0GW-wV-dvk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1148,7 +1148,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="n8v-pP-2nu" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="CalendarIcon25" id="gDT-8Y-r8l"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FLZ-nV-edJ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FLZ-nV-edJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1234,7 +1234,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ayy-nx-3p5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="UserIcon25" id="sNN-gU-klQ"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wlQ-bg-1US">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wlQ-bg-1US">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

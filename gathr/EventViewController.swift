@@ -114,11 +114,15 @@ class EventViewController: UIViewController, UITextFieldDelegate{
             }
             
             if let place = place {
-                print("Location picked: \(place.name), \(place.formattedAddress)")
-                self.locationTextField.text = "\(place.name), \(place.formattedAddress!)"
+
                 self.locationLong = Double(place.coordinate.longitude)
                 self.locationLat = Double(place.coordinate.latitude)
-                
+                if place.formattedAddress != nil {
+                    print("Location picked: \(place.name), \(place.formattedAddress!)")
+                    self.locationTextField.text = "\(place.name), \(place.formattedAddress!)"
+                } else {
+                    self.locationTextField.text = "\(self.locationLong), \(self.locationLat)"
+                }
             } else {
                 print("No place selected")
             }

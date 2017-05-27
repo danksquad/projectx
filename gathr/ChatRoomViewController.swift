@@ -122,7 +122,7 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         let userSent = message["sent_by"] as! [String]
         
         cell.messageLabel.text = message.value(forKey: "text") as? String
-        cell.usernameLabel.text = ("\(userSent[2]) \(userSent[3])")
+        cell.usernameLabel.text = ("\(userSent[2]) \(userSent[3]) (\(userSent[1]))")
         
         var query = PFQuery(className:"_User")
         query.getObjectInBackground(withId: "\(userSent[0])") {
