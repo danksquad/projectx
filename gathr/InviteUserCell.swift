@@ -21,6 +21,7 @@ class InviteUserCell: UITableViewCell {
                 self.profileView.file = profileImage
                 self.profileView.loadInBackground()
             }
+            self.profileView.layer.cornerRadius = 10
         }
     }
 

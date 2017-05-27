@@ -37,7 +37,6 @@ class EventViewController: UIViewController, UITextFieldDelegate{
         locationTextField.tag = 1
         descriptionTextField.delegate = self
         descriptionTextField.tag = 2 //Increment accordingly
-    
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {

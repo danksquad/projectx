@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController {
                 self.profileView.loadInBackground()
             }
         }
-        
+        self.profileView.layer.cornerRadius = 5
         self.profileView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView(sender:)))
         self.profileView.addGestureRecognizer(tapGesture)
