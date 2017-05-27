@@ -595,7 +595,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-8f-Koy">
-                                                    <rect key="frame" x="78" y="8" width="71" height="22"/>
+                                                    <rect key="frame" x="8" y="8" width="71" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="yA7-cy-Ikl"/>
                                                     </constraints>
@@ -603,15 +603,8 @@
                                                     <color key="textColor" red="1" green="0.58866175210000005" blue="0.24414326289999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Cfa-QE-tWx" customClass="PFImageView">
-                                                    <rect key="frame" x="10" y="10" width="60" height="60"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="60" id="nex-gN-Beu"/>
-                                                        <constraint firstAttribute="width" constant="60" id="sDQ-lK-nwK"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOW-BK-CRr">
-                                                    <rect key="frame" x="78" y="38" width="289" height="36"/>
+                                                    <rect key="frame" x="8" y="38" width="359" height="36"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdA-HC-krK">
                                                             <rect key="frame" x="8" y="4" width="58" height="28"/>
@@ -623,6 +616,7 @@
                                                     <color key="backgroundColor" red="0.84724211692810059" green="0.40014815330505371" blue="0.0033390107564628124" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="gdA-HC-krK" secondAttribute="bottom" constant="4" id="AMJ-PI-f36"/>
+                                                        <constraint firstAttribute="height" constant="36" id="BmL-qm-NWu"/>
                                                         <constraint firstItem="gdA-HC-krK" firstAttribute="top" secondItem="SOW-BK-CRr" secondAttribute="top" constant="4" id="ULm-lJ-EQE"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gdA-HC-krK" secondAttribute="trailing" constant="8" id="ZUG-5I-p7X"/>
                                                         <constraint firstItem="gdA-HC-krK" firstAttribute="leading" secondItem="SOW-BK-CRr" secondAttribute="leading" constant="8" id="mcs-mg-4lM"/>
@@ -632,14 +626,12 @@
                                             <color key="backgroundColor" red="0.4975961538" green="0.4951923077" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="FFS-8f-Koy" firstAttribute="top" secondItem="IUr-JE-afp" secondAttribute="top" constant="8" id="6yg-d1-GjW"/>
-                                                <constraint firstItem="Cfa-QE-tWx" firstAttribute="top" secondItem="IUr-JE-afp" secondAttribute="top" constant="10" id="L4B-d7-xSE"/>
+                                                <constraint firstItem="FFS-8f-Koy" firstAttribute="leading" secondItem="IUr-JE-afp" secondAttribute="leadingMargin" id="L6S-Io-5ck"/>
+                                                <constraint firstItem="SOW-BK-CRr" firstAttribute="leading" secondItem="FFS-8f-Koy" secondAttribute="leading" id="L7g-hc-era"/>
                                                 <constraint firstItem="SOW-BK-CRr" firstAttribute="top" secondItem="FFS-8f-Koy" secondAttribute="bottom" constant="8" id="Rwn-LO-31e"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FFS-8f-Koy" secondAttribute="trailing" constant="8" id="XQ7-E1-d79"/>
                                                 <constraint firstAttribute="bottom" secondItem="SOW-BK-CRr" secondAttribute="bottom" constant="20" id="a4K-Jg-25u"/>
-                                                <constraint firstItem="FFS-8f-Koy" firstAttribute="leading" secondItem="Cfa-QE-tWx" secondAttribute="trailing" constant="8" id="g3j-su-MTY"/>
                                                 <constraint firstAttribute="trailing" secondItem="SOW-BK-CRr" secondAttribute="trailing" constant="8" id="kz6-me-L5m"/>
-                                                <constraint firstItem="SOW-BK-CRr" firstAttribute="leading" secondItem="Cfa-QE-tWx" secondAttribute="trailing" constant="8" id="lCU-yB-cqH"/>
-                                                <constraint firstItem="Cfa-QE-tWx" firstAttribute="leading" secondItem="IUr-JE-afp" secondAttribute="leading" constant="10" id="vSq-z0-fhz"/>
                                                 <constraint firstItem="SOW-BK-CRr" firstAttribute="top" secondItem="IUr-JE-afp" secondAttribute="topMargin" constant="30" id="ydj-dR-R1d"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -647,7 +639,6 @@
                                         <connections>
                                             <outlet property="messageContainer" destination="SOW-BK-CRr" id="cd4-zO-0vA"/>
                                             <outlet property="messageLabel" destination="gdA-HC-krK" id="qnl-12-Zg8"/>
-                                            <outlet property="profileImage" destination="Cfa-QE-tWx" id="HXh-F4-j9g"/>
                                             <outlet property="usernameLabel" destination="FFS-8f-Koy" id="eIC-Ow-wiv"/>
                                         </connections>
                                     </tableViewCell>
