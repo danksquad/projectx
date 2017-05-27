@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import AFNetworking
 
-class CreateAccountViewController: UIViewController {
+class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var fNameField: UITextField!
     @IBOutlet weak var lNameField: UITextField!
     @IBOutlet weak var usernameField: UITextField!
@@ -34,11 +34,39 @@ class CreateAccountViewController: UIViewController {
         self.profileImageView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView(sender:)))
         self.profileImageView.addGestureRecognizer(tapGesture)
+        
+        fNameField.delegate = self
+        fNameField.tag = 0 //Increment accordingly
+        lNameField.delegate = self
+        lNameField.tag = 1
+        usernameField.delegate = self
+        usernameField.tag = 2 //Increment accordingly
+        passwordField.delegate = self
+        passwordField.tag = 3
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        // Try to find next responder
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            // Not found, so remove keyboard.
+            textField.resignFirstResponder()
+        }
+        // Do not add a line break
+        return false
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     @IBAction func onCancel(_ sender: Any) {
