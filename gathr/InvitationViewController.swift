@@ -11,9 +11,11 @@ import Parse
 
 class InvitationViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var searchBar: UISearchBar!
     
     var event: PFObject?
     var users: [PFObject]?
+    var filteredUsers: [PFObject]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,4 +114,13 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
         
         self.present(messageController, animated: true)
     }
+}
+extension InvitationViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredUsers = searchText.isEmpty ? users : users.filter { (item:String) -> Bool in
+            
+        }
+    }
+    
+    tableView.reloadData()
 }

@@ -28,13 +28,13 @@ class ProfileViewController: UIViewController {
         if let currentUser = PFUser.current() {
             
             if let firstName = currentUser["firstName"] as! String? {
-                firstNameLabel.text = ("First Name: " + firstName)
+                firstNameLabel.text = firstName
             }
             if let lastName = currentUser["lastName"] as! String? {
-                lastNameLabel.text = ("Last Name: " + lastName)
+                lastNameLabel.text = lastName
             }
             if let username = currentUser["username"] as! String? {
-                screenNameLabel.text = ("Username: " + username)
+                screenNameLabel.text = ("@\(username)")
             }
             
             if let profileImage = currentUser["profile_image"] as! PFFile? {
@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController {
                 self.profileView.loadInBackground()
             }
         }
-        self.profileView.layer.cornerRadius = 5
+        self.profileView.layer.cornerRadius = 10
         self.profileView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView(sender:)))
         self.profileView.addGestureRecognizer(tapGesture)
@@ -63,6 +63,7 @@ class ProfileViewController: UIViewController {
         
     }
 
+    @IBOutlet var onLogout: UIBarButtonItem!
     /*
     // MARK: - Navigation
 
