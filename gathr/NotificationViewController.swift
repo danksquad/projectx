@@ -138,26 +138,13 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                 if let seen = currEventSeenStatus{
                     if(seen == true){
                         self.seenMark = true;
-                        cell.eventSeenLabel.text = "Seen: \(seen)"
+                        cell.eventSeenLabel.text = ""//"Seen: \(seen)"
                     }
                     else{
                         self.seenMark = false;
-                        cell.eventSeenLabel.text = "Seen: \(seen)"
-                  //  }
-              //  }
-               // if(self.seenMark == false){
-                    print("Alert Created!")
-                    
-                    let notification = UILocalNotification()
-                     notification.alertTitle = currRoomName as! String
-                     notification.alertBody = currDescription as! String
-                     notification.alertAction = "open"
-                     notification.fireDate = self.eventTime as Date?
-                     notification.soundName = UILocalNotificationDefaultSoundName
-                     UIApplication.shared.scheduleLocalNotification(notification)
-                     print("Alert Created!") /*
-                    
-                    //////NEW SWIFT SYNTAX///////
+                        cell.eventSeenLabel.text = ""
+                        print("Alert Created!")
+            
                     
                     //defining notification contents
                     let content = UNMutableNotificationContent()
@@ -165,8 +152,8 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                     content.body = currDescription as! String
                     content.sound = UNNotificationSound.default()
                     
-                    //adding image
-                    /*  if let path = Bundle.main.path(forResource: "60x60", ofType: "png") {
+                   /* //adding image
+                      if let path = Bundle.main.path(forResource: "60x60", ofType: "png") {
                      let url = URL(fileURLWithPath: path)
                      
                      do {
@@ -178,14 +165,17 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                      }*/
                     
                     //making notification request
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: eventStartTime as! DateComponents, repeats: false)
+                    let date = self.eventTime
+                    let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: date! as Date)
+                        
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
                     let request = UNNotificationRequest(identifier: currRoomName as! String, content: content, trigger: trigger)
                     UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
                     UNUserNotificationCenter.current().add(request) {(error) in
                         if (error != nil){
-                            print(error?.localizedDescription)
+                            print(error?.localizedDescription ?? "error")
                         }
-                    }*/
+                    }
                     print("Alert Created!")
                     // create the controller
                     let messageController = UIAlertController(title: "Notification Created!", message: "Notification Created for \(currRoomName!)", preferredStyle: .alert)
