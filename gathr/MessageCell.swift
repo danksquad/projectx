@@ -21,10 +21,11 @@ class MessageCell: UITableViewCell {
         didSet {
             var query = PFQuery(className:"_User")
             query.getObjectInBackground(withId: objectId) {
-                (currUser: PFObject?, error: Error?) -> Void in
-                if let profileImage = currUser?["profile_image"] as! PFFile? {
+                (thisUser: PFObject?, error: Error?) -> Void in
+                if let profileImage = thisUser?["profile_image"] as! PFFile? {
                     self.profileImage.file = profileImage
                     self.profileImage.loadInBackground()
+                    print("set message profile pic")
                 }
                 else {
                     print(error)

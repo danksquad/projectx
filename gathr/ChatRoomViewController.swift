@@ -123,7 +123,7 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         
         cell.messageLabel.text = message.value(forKey: "text") as? String
         cell.usernameLabel.text = ("\(userSent[2]) \(userSent[3]) (\(userSent[1]))")
-        cell.objectId = userSent[0]
+        //cell.objectId = userSent[0]
         
         return cell
     }
