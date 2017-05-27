@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import GooglePlacePicker
+import TextFieldEffects
 
 class EventViewController: UIViewController, UITextFieldDelegate{
     
@@ -17,7 +18,6 @@ class EventViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var startTimeDatePicker: UIDatePicker!
     @IBOutlet weak var endTimeDatePicker: UIDatePicker!
     @IBOutlet weak var descriptionTextField: UITextField!
-    @IBOutlet weak var doneButton: UIButton!
     
     var locationLong: Double?
     var locationLat: Double?
@@ -29,7 +29,6 @@ class EventViewController: UIViewController, UITextFieldDelegate{
             navigationBar.tintColor = darkOrange
             navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: darkOrange]
         }
-        doneButton.layer.cornerRadius = 5
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         nameTextField.delegate = self
@@ -39,7 +38,6 @@ class EventViewController: UIViewController, UITextFieldDelegate{
         descriptionTextField.delegate = self
         descriptionTextField.tag = 2 //Increment accordingly
     
-
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
@@ -63,7 +61,7 @@ class EventViewController: UIViewController, UITextFieldDelegate{
         view.endEditing(true)
     }
     
-    @IBAction func onDoneButton(_ sender: UIButton) {
+    @IBAction func onDoneButton(_ sender: UIBarButtonItem) {
         if (self.nameTextField.text?.isEmpty)! || (self.locationTextField.text?.isEmpty)! {
             let alertController = UIAlertController(title: "ALERT", message: "Name and Location required", preferredStyle: .alert)
             

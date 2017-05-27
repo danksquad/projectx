@@ -16,6 +16,21 @@ PODS:
     - AFNetworking/NSURLSession
   - Bolts-Swift (1.3.0)
   - Bolts/Tasks (1.8.4)
+  - FontAwesomeKit (2.2.0):
+    - FontAwesomeKit/Core (= 2.2.0)
+    - FontAwesomeKit/FontAwesome (= 2.2.0)
+    - FontAwesomeKit/FoundationIcons (= 2.2.0)
+    - FontAwesomeKit/IonIcons (= 2.2.0)
+    - FontAwesomeKit/Zocial (= 2.2.0)
+  - FontAwesomeKit/Core (2.2.0)
+  - FontAwesomeKit/FontAwesome (2.2.0):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/FoundationIcons (2.2.0):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/IonIcons (2.2.0):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/Zocial (2.2.0):
+    - FontAwesomeKit/Core
   - GoogleMaps (2.1.1):
     - GoogleMaps/Maps (= 2.1.1)
   - GoogleMaps/Base (2.1.1)
@@ -37,9 +52,12 @@ PODS:
     - Bolts/Tasks (~> 1.3)
     - Parse (~> 1.9)
   - SocketRocket (0.5.1)
+  - SVProgressHUD (2.1.2)
+  - TextFieldEffects (1.3.0)
 
 DEPENDENCIES:
   - AFNetworking
+  - FontAwesomeKit
   - GoogleMaps
   - GooglePlacePicker
   - GooglePlaces
@@ -47,11 +65,14 @@ DEPENDENCIES:
   - Parse
   - ParseLiveQuery
   - ParseUI
+  - SVProgressHUD
+  - TextFieldEffects
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Bolts-Swift: fa98d1b59fc1acea9b21a21306dcdca1c85e3737
+  FontAwesomeKit: 025fd4dd1017fe4e3f8d47b03e024deedbb33cd4
   GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
   GooglePlacePicker: 665f39f931f2df32f9dd3fcc45f7e8abf71e535c
   GooglePlaces: 35636d86e5020cba3856eb988c09a5491de0a65a
@@ -60,7 +81,9 @@ SPEC CHECKSUMS:
   ParseLiveQuery: 4c0f3f571ba0f358a4e592cd7d4b55c95ab9655e
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  TextFieldEffects: ef594746f17997c813e07633f8ae5acaf9b04f27
 
-PODFILE CHECKSUM: d3da7c7991738a9c3a570a4afcdee311a7d70781
+PODFILE CHECKSUM: 841020d12a8d42de55dc9bb9b634d961549aebf5
 
 COCOAPODS: 1.2.0

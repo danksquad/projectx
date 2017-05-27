@@ -14,4 +14,7 @@ target 'gathr' do
   pod 'GooglePlaces'
   pod 'GooglePlacePicker'
   pod 'GoogleMaps'
+  pod 'FontAwesomeKit'
+  pod 'SVProgressHUD'
+  pod 'TextFieldEffects'
 end
