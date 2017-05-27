@@ -28,6 +28,7 @@ class InvitationViewController: UIViewController {
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.searchBar.delegate = self
         self.tableView.separatorColor = UIColor.black
         self.tableView.separatorInset = UIEdgeInsets.zero
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
@@ -70,7 +71,7 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "com.gates.InviteUserCell", for: indexPath) as! InviteUserCell
         
-        let currUser = users![indexPath.row] as! PFUser
+        let currUser = filteredUsers![indexPath.row] as! PFUser
         
         let currName = "\(currUser.value(forKey: "firstName")!) \(currUser.value(forKey: "lastName")!)"
         let currUsername = currUser.value(forKey: "username") as! String
@@ -83,10 +84,9 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let users = users {
-            return users.count
+        if let filteredUsers = filteredUsers {
+            return filteredUsers.count
         }
-        
         return 0
     }
     
@@ -117,10 +117,10 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
 }
 extension InvitationViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredUsers = searchText.isEmpty ? users : users.filter { (item:String) -> Bool in
+        filteredUsers = searchText.isEmpty ? nil : users?.filter { (item:PFObject) -> Bool in
             
+            return (((item.value(forKey: "username") as! String!).range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil) || ((item.value(forKey: "firstName") as! String!).range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil) || ((item.value(forKey: "lastName") as! String!).range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil))
         }
+        self.tableView.reloadData()
     }
-    
-    tableView.reloadData()
 }

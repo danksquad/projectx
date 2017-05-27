@@ -54,6 +54,7 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
             self.scrollToBottom(animated: true)
         })
         
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -121,7 +122,19 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         let userSent = message["sent_by"] as! [String]
         
         cell.messageLabel.text = message.value(forKey: "text") as? String
-        cell.usernameLabel.text = userSent[1]
+        cell.usernameLabel.text = ("\(userSent[2]) \(userSent[3])")
+        
+        var query = PFQuery(className:"_User")
+        query.getObjectInBackground(withId: "\(userSent[0])") {
+            (currUser: PFObject?, error: Error?) -> Void in
+            if let profileImage = currUser?["profile_image"] as! PFFile? {
+                cell.profileImage.file = profileImage
+                cell.profileImage.loadInBackground()
+            }
+            else {
+                print(error)
+            }
+        }
         
         return cell
     }
