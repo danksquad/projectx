@@ -16,6 +16,7 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var createAccountButton: UIButton!
     
     var profileImage: UIImage = #imageLiteral(resourceName: "profile-placeholder")
 
@@ -26,6 +27,7 @@ class CreateAccountViewController: UIViewController {
             navigationBar.tintColor = darkOrange
             navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: darkOrange]
         }
+        createAccountButton.layer.cornerRadius = 5
 
         // Do any additional setup after loading the view.
         self.profileImageView.isUserInteractionEnabled = true

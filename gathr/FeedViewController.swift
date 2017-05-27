@@ -106,7 +106,7 @@ extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
         if let currEventDesc = currEventDesc {
             cell.eventDescriptionLabel.text = currEventDesc
         }
-        
+             
         return cell
     }
     

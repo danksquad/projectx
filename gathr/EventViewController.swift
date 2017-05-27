@@ -17,6 +17,7 @@ class EventViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var startTimeDatePicker: UIDatePicker!
     @IBOutlet weak var endTimeDatePicker: UIDatePicker!
     @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var doneButton: UIButton!
     
     var locationLong: Double?
     var locationLat: Double?
@@ -28,6 +29,7 @@ class EventViewController: UIViewController, UITextFieldDelegate{
             navigationBar.tintColor = darkOrange
             navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: darkOrange]
         }
+        doneButton.layer.cornerRadius = 5
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         nameTextField.delegate = self

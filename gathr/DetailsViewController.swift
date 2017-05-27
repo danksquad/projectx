@@ -22,6 +22,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var eventEndTime: UILabel!
     @IBOutlet weak var eventStartTime: UILabel!
+    @IBOutlet weak var inviteButton: UIButton!
     
     var event: PFObject?
     var eventLong: CLLocationDegrees?
@@ -35,6 +36,7 @@ class DetailsViewController: UIViewController {
             navigationBar.tintColor = darkOrange
             navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: darkOrange]
         }
+        inviteButton.layer.cornerRadius = 5
         
         let eventName = event?["name"] as? String
         self.eventName.text = eventName

@@ -341,6 +341,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="createAccountButton" destination="2Gb-9s-9gq" id="bAD-2z-qxH"/>
                         <outlet property="fNameField" destination="VRa-2L-DZ5" id="ty6-nv-u3c"/>
                         <outlet property="lNameField" destination="a0g-7U-Vzh" id="Qlq-N5-KAt"/>
                         <outlet property="passwordField" destination="tuv-Ce-Eso" id="XGn-Os-kfA"/>
@@ -445,7 +446,7 @@
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lkP-m3-Aml">
                                                 <rect key="frame" x="10" y="371" width="81" height="30"/>
-                                                <color key="backgroundColor" red="0.80269505029999999" green="0.31457109900000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.84724211692810059" green="0.40014815330505371" blue="0.0033390107564628124" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Invite Users">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -548,13 +549,14 @@
                         <outlet property="eventName" destination="PdY-4w-aAT" id="xmH-wp-ulk"/>
                         <outlet property="eventStartDate" destination="Ix2-NC-vEV" id="Ivi-B3-lUM"/>
                         <outlet property="eventStartTime" destination="H0D-2M-YUd" id="TIZ-mh-dyN"/>
+                        <outlet property="inviteButton" destination="lkP-m3-Aml" id="Lr6-7B-IIs"/>
                         <outlet property="mapView" destination="HAB-zq-46h" id="7Wt-St-MhF"/>
                         <outlet property="scrollView" destination="dHn-yO-YNz" id="Sou-Qk-4Rf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LfE-n4-C7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4036" y="-422.33883058470769"/>
+            <point key="canvasLocation" x="3950" y="-439"/>
         </scene>
         <!--Chatroom-->
         <scene sceneID="ser-YS-sjD">
@@ -605,7 +607,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.80269505029999999" green="0.31457109900000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.84724211692810059" green="0.40014815330505371" blue="0.0033390107564628124" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="gdA-HC-krK" secondAttribute="bottom" constant="8" id="AMJ-PI-f36"/>
                                                         <constraint firstItem="gdA-HC-krK" firstAttribute="top" secondItem="SOW-BK-CRr" secondAttribute="top" constant="8" id="ULm-lJ-EQE"/>
@@ -642,7 +644,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PT6-Zt-lLk">
                                         <rect key="frame" x="331" y="8" width="36" height="34"/>
-                                        <color key="backgroundColor" red="0.53590819132564094" green="0.21032175135014033" blue="0.0040069913882617202" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.84724211692810059" green="0.40014815330505371" blue="0.0033390107564628124" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Send">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -726,14 +728,14 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seen ✓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvo-TR-7g7">
-                                                    <rect key="frame" x="302" y="36.5" width="58" height="34"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Seen ✓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvo-TR-7g7">
+                                                    <rect key="frame" x="311.5" y="35.5" width="48.5" height="34"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfr-em-sHC">
-                                                    <rect key="frame" x="15" y="36.5" width="36" height="34"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfr-em-sHC">
+                                                    <rect key="frame" x="15" y="33" width="36" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -924,10 +926,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGP-xf-gTi">
-                                <rect key="frame" x="301" y="518.5" width="59" height="38"/>
-                                <color key="backgroundColor" red="1" green="0.58866175210000005" blue="0.24414326289999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGP-xf-gTi">
+                                <rect key="frame" x="307" y="519" width="53" height="40"/>
+                                <color key="backgroundColor" red="0.84724211692810059" green="0.40014815330505371" blue="0.0033390107564628124" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <state key="normal" title="DONE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -995,6 +997,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionTextField" destination="xmu-0H-nmv" id="yxA-Eq-6dQ"/>
+                        <outlet property="doneButton" destination="bGP-xf-gTi" id="1jy-YR-cdN"/>
                         <outlet property="endTimeDatePicker" destination="Bov-aP-evx" id="y77-qh-fte"/>
                         <outlet property="locationTextField" destination="JuZ-ZE-uo8" id="CMO-Ba-gTg"/>
                         <outlet property="nameTextField" destination="68y-eD-4G8" id="Z1O-lj-Uib"/>
@@ -1201,6 +1204,6 @@
         <image name="low-poly-texture-1" width="750" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9yU-1m-loM"/>
+        <segue reference="KEN-su-KWd"/>
     </inferredMetricsTieBreakers>
 </document>
