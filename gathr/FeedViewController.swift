@@ -22,7 +22,10 @@ class FeedViewController: UIViewController {
             navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: darkOrange]
         }
 
-        tableView.dataSource = self
+        self.tableView.dataSource = self
+        self.tableView.separatorColor = UIColor.black
+        self.tableView.separatorInset = UIEdgeInsets.zero
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         ParseClient.getAllEvents { (receivedEvents: [PFObject]?) in
             if let receivedEvents = receivedEvents {

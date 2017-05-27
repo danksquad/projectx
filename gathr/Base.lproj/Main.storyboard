@@ -741,6 +741,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="qfr-em-sHC" secondAttribute="bottom" constant="8" id="5KA-04-sbs"/>
                                                 <constraint firstItem="TPr-g5-iLU" firstAttribute="top" secondItem="5Io-DH-zew" secondAttribute="top" constant="8" id="Fxo-Vw-QiW"/>
@@ -754,7 +755,7 @@
                                                 <constraint firstItem="qfr-em-sHC" firstAttribute="leading" secondItem="5Io-DH-zew" secondAttribute="leading" constant="15" id="v7v-Ot-S80"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.4975961538" green="0.4951923077" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="eventDateLabel" destination="qfr-em-sHC" id="dW3-H7-SEp"/>
                                             <outlet property="eventHostNameLabel" destination="eNp-Uq-BlU" id="h4K-Ro-M4s"/>
@@ -765,7 +766,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FcQ-re-g0M" firstAttribute="top" secondItem="5dk-3D-T86" secondAttribute="top" id="3CM-Na-Ysy"/>
                             <constraint firstItem="FcQ-re-g0M" firstAttribute="leading" secondItem="5dk-3D-T86" secondAttribute="leading" id="84L-ua-1ad"/>
@@ -1083,6 +1084,18 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="YhC-OF-avG" secondAttribute="bottom" constant="10" id="1FB-Dg-fZU"/>
+                                                <constraint firstItem="fgm-E1-gka" firstAttribute="top" secondItem="pLH-ow-bUe" secondAttribute="top" constant="10" id="A9E-a1-hLg"/>
+                                                <constraint firstItem="YhC-OF-avG" firstAttribute="top" secondItem="fgm-E1-gka" secondAttribute="bottom" constant="3" id="Ihc-H3-jWb"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YhC-OF-avG" secondAttribute="trailing" constant="10" id="OXU-ZN-BQ1"/>
+                                                <constraint firstItem="P49-aL-luM" firstAttribute="leading" secondItem="pLH-ow-bUe" secondAttribute="leading" constant="10" id="REc-UZ-CJ6"/>
+                                                <constraint firstItem="P49-aL-luM" firstAttribute="top" secondItem="pLH-ow-bUe" secondAttribute="top" constant="10" id="aIn-9M-oq7"/>
+                                                <constraint firstItem="YhC-OF-avG" firstAttribute="leading" secondItem="P49-aL-luM" secondAttribute="trailing" constant="15" id="ae3-cY-SCy"/>
+                                                <constraint firstAttribute="bottom" secondItem="P49-aL-luM" secondAttribute="bottom" constant="10" id="egS-iU-4nW"/>
+                                                <constraint firstItem="fgm-E1-gka" firstAttribute="leading" secondItem="P49-aL-luM" secondAttribute="trailing" constant="15" id="jdI-jM-qea"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
@@ -1095,6 +1108,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DV0-8N-4GB" firstAttribute="top" secondItem="342-37-DY0" secondAttribute="bottom" id="CXw-zQ-mWG"/>
+                            <constraint firstItem="342-37-DY0" firstAttribute="top" secondItem="F2W-vr-t6s" secondAttribute="top" id="KiM-zY-Hft"/>
+                            <constraint firstAttribute="trailing" secondItem="342-37-DY0" secondAttribute="trailing" id="esI-yY-B1i"/>
+                            <constraint firstItem="342-37-DY0" firstAttribute="leading" secondItem="F2W-vr-t6s" secondAttribute="leading" id="oNS-Eh-yf0"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="342-37-DY0" id="UQ2-Jd-hV1"/>
@@ -1128,7 +1147,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="n8v-pP-2nu" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="CalendarIcon25" id="gDT-8Y-r8l"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FLZ-nV-edJ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FLZ-nV-edJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1209,7 +1228,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ayy-nx-3p5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="UserIcon25" id="sNN-gU-klQ"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wlQ-bg-1US">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wlQ-bg-1US">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

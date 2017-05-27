@@ -28,6 +28,9 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 200
+        self.tableView.separatorColor = UIColor.black
+        self.tableView.separatorInset = UIEdgeInsets.zero
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
     
         let tap = UITapGestureRecognizer(target: self, action: #selector(ChatRoomViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
