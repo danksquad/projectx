@@ -50,7 +50,6 @@ class Chatroom: NSObject {
         let query: PFQuery = PFQuery(className: "messages")
         query.whereKey("room_id", equalTo: roomId!)
         lqClient.unsubscribe(query)
-        lqClient
     }
     
     func sendMessage(message: String, completion: @escaping (Bool) -> Void) {

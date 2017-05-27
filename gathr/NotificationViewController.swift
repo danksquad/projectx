@@ -9,6 +9,9 @@
 import UIKit
 import Parse
 import UserNotifications
+import ParseLiveQuery
+
+let lqtClient = ParseLiveQuery.Client()
 
 class NotificationViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -20,6 +23,8 @@ class NotificationViewController: UIViewController {
     var seenMark: Bool?
     var eventTime: NSDate?
     var refreshControl: UIRefreshControl!
+    var subscription: Subscription<PFObject>?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +56,8 @@ class NotificationViewController: UIViewController {
             self.notifications = retrievedNotifications
             self.tableView.reloadData()
         }
-        
+        // Configure User Notification Center
+        UNUserNotificationCenter.current().delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -60,6 +66,47 @@ class NotificationViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override func viewDidAppear(_ animated: Bool) {
+        startNewNotifications()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        stopNewNotifications()
+    }
+    
+    func startNewNotifications() {
+        print("start listening to new notifications")
+        suscribeNotifications(toUser: userToken) { (retrievedNotification: PFObject) in
+            self.notifications!.append(retrievedNotification)
+            self.tableView.reloadData()
+        }
+
+
+    }
+    
+    func stopNewNotifications() {
+        print("stop listening to new notifications")
+        unsuscribeNotifications(toUser: userToken)
+    }
+    // creates a new subscription using ParseLiveQuery to get new messages
+     func suscribeNotifications(toUser: String, completion: @escaping (PFObject) -> Void) {
+        print("subscribed to notifications")
+        let query: PFQuery = PFQuery(className: "notifications")
+        query.whereKey("to_user", equalTo: toUser)
+        
+        
+        subscription = lqtClient.subscribe(query).handle(ParseLiveQuery.Event.created) { _, obj in
+            completion(obj)
+        }
+        
+    }
+    
+    // cancels the subscription so that new messages are not received
+     func unsuscribeNotifications(toUser: String) {
+        let query: PFQuery = PFQuery(className: "notifications")
+        query.whereKey("to_user", equalTo: toUser)
+        lqtClient.unsubscribe(query)
+    }
+    
     
     func refreshEvents(_ refreshControl: UIRefreshControl) {
         ParseClient.getNotifications(toUser: userToken) { (retrievedNotifications: [PFObject]) in
@@ -155,18 +202,6 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
                     content.body = currDescription as! String
                     content.sound = UNNotificationSound.default()
                     
-                   /* //adding image
-                      if let path = Bundle.main.path(forResource: "60x60", ofType: "png") {
-                     let url = URL(fileURLWithPath: path)
-                     
-                     do {
-                     let attachment = try UNNotificationAttachment(identifier: "60x60", url: url, options: nil)
-                     content.attachments = [attachment]
-                     } catch {
-                     print("The attachment was not loaded.")
-                     }
-                     }*/
-                    
                     //making notification request
                     let date = self.eventTime
                     let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: date! as Date)
@@ -206,6 +241,15 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
     
     
     
+}
+extension NotificationViewController: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+
+    }
 }
 
 

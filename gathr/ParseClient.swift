@@ -13,9 +13,8 @@ import ParseLiveQuery
 class ParseClient: NSObject {
     static var events: [PFObject] = []
     static var users: [PFObject] = []
-    
     static var currentUser: PFUser?
-    
+
     // This method will get pull all of the events from the user
     class func getAllEvents(completion: @escaping ([PFObject]?) -> ()) {
         let query = PFQuery(className: "events")
@@ -133,6 +132,7 @@ class ParseClient: NSObject {
             }
         }
     }
+   
         
     // This method will generate the random userID or eventID
     class func generateUID(length: Int) -> String {
