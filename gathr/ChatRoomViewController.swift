@@ -32,8 +32,8 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.separatorInset = UIEdgeInsets.zero
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
     
-        let tap = UITapGestureRecognizer(target: self, action: #selector(ChatRoomViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
+        //let tap = UITapGestureRecognizer(target: self, action: #selector(ChatRoomViewController.dismissKeyboard))
+        //view.addGestureRecognizer(tap)
         
         let darkOrange = UIColor(red: 205/255.0, green: 80/255.0, blue: 0.0, alpha: 1.0)
         if let navigationBar = navigationController?.navigationBar {
@@ -54,20 +54,15 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
             self.scrollToBottom(animated: true)
         })
         
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
-//        view.addGestureRecognizer(tap)
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.messageTextField.becomeFirstResponder()
         startNewMessages()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    func dismissKeyboard() {
-        view.endEditing(true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -106,7 +101,6 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
                 if (success) {
                     print("Message sent successfully")
                     self.messageTextField.text = ""
-                    self.dismissKeyboard()
                     self.tableView.reloadData()
                 }
             })
@@ -126,7 +120,7 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         let message = messages![indexPath.row]
         let userSent = message["sent_by"] as! [String]
         
-        cell.messageLabel.text = message.value(forKey: "text") as! String
+        cell.messageLabel.text = message.value(forKey: "text") as? String
         cell.usernameLabel.text = userSent[1]
         
         return cell

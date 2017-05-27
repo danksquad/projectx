@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = UIColor(red: 205/255, green: 80/255, blue: 0, alpha: 1.0)
         
         // Prevent keyboard from covering textfields
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        //IQKeyboardManager.sharedManager().enable = true
+        //IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         // For user notifications
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) {(accepted, error) in
