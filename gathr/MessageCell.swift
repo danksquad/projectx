@@ -22,7 +22,7 @@ class MessageCell: UITableViewCell {
     
     @IBOutlet weak var messageContainer: UIView! {
         didSet {
-            self.messageContainer.layer.cornerRadius = 5
+            self.messageContainer.layer.cornerRadius = 10
         }
     }
     override func awakeFromNib() {

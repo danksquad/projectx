@@ -30,6 +30,7 @@ class CreateAccountViewController: UIViewController {
         createAccountButton.layer.cornerRadius = 5
 
         // Do any additional setup after loading the view.
+        self.profileImageView.layer.cornerRadius = 10
         self.profileImageView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapProfileView(sender:)))
         self.profileImageView.addGestureRecognizer(tapGesture)
