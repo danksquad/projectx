@@ -30,7 +30,7 @@ Here's a GIF walkthrough:
 <img src='https://github.com/danksquad/projectx/blob/master/parseChatGIF.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
-Here's the wireframe:
+Here's the first basic wireframe:
 <img src='https://github.com/danksquad/projectx/blob/master/GathrWireframe.PNG' title='Wireframe' width='' alt='Wireframe' />
 
 Database Schema:
