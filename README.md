@@ -26,6 +26,7 @@ Heroku Link: <br />
 https://damp-caverns-14732.herokuapp.com/ 
 
 Here's a GIF walkthrough:
+
 <img src='https://github.com/danksquad/projectx/blob/master/parseChatGIF.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
