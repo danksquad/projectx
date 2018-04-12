@@ -25,6 +25,13 @@ As a host, I want to automatically notify my attendees if they are late to the e
 Heroku Link: <br />
 https://damp-caverns-14732.herokuapp.com/ 
 
+Here's a GIF walkthrough:
+<img src='https://github.com/danksquad/projectx/blob/master/parseChatGIF.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+
+Here's the wireframe:
+<img src='https://github.com/danksquad/projectx/blob/master/GathrWireframe.PNG' title='Wireframe' width='' alt='Wireframe' />
+
 Database Schema:
 
 --User-- <br />
