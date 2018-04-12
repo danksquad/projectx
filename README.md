@@ -1,4 +1,4 @@
-**Gathr
+# Gathr
 
 ## Description:
 Gathr is an event planning and group messaging app that puts the events at the focus.  Users are notified when they are invited to events that are hosted by their peers. From there, they can group message with everyone going to that event.
