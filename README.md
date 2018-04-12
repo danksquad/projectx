@@ -3,6 +3,10 @@
 ## Description:
 Gathr is an event planning and group messaging app that puts the events at the focus.  Users are notified when they are invited to events that are hosted by their peers. From there, they can group message with everyone going to that event.
 
+## Here's a GIF walkthrough:
+
+<img src='https://github.com/danksquad/projectx/blob/master/parseChatGIF.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 ## Required user stories: <br />
 As a user, I want to be able to login, so that I can access my account. <br />
 As a user, I want to be able to create a new event, so that I can share it with others. <br />
@@ -24,11 +28,6 @@ As a host, I want to automatically notify my attendees if they are late to the e
 
 ## Heroku Link: <br />
 https://damp-caverns-14732.herokuapp.com/ 
-
-## Here's a GIF walkthrough:
-
-<img src='https://github.com/danksquad/projectx/blob/master/parseChatGIF.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
 
 ## Here's the first basic wireframe:
 <img src='https://github.com/danksquad/projectx/blob/master/GathrWireframe.PNG' title='Wireframe' width='' alt='Wireframe' />
